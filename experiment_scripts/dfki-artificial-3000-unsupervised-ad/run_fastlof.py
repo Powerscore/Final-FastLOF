@@ -21,14 +21,15 @@ DATASET_FILEPATH = "data/dfki-artificial-3000-unsupervised-ad.csv"
 DATASET_NAME = "dfki-artificial-3000-unsupervised-ad"
 
 # Experiment parameters
-K_MIN = 10
-K_MAX = 50
-K_STEP = 10
-THRESHOLD = 1.1
-CHUNK_SIZES = [100, 500, 1000, 2000]
+K_VALUES = [10, 20, 30, 40, 50]
+THRESHOLDS = [0, 1.0, 1.01, 1.1, 1.2]  # List of thresholds to test
+MIN_CHUNK_SIZE = 50
+MAX_CHUNK_SIZE = 1500
+CHUNK_INTERVAL = 50
 N_RUNS = 10
 
-if __name__ == "__main__":
+if __name__ == "_
+_main__":
     print(f"\n{'='*80}")
     print(f"FastLOF Experiment - {DATASET_NAME}")
     print(f"{'='*80}\n")
@@ -39,18 +40,24 @@ if __name__ == "__main__":
     print(f"Dataset shape: {X.shape}")
     print(f"Number of anomalies: {sum(y)} ({sum(y)/len(y)*100:.2f}%)")
     
-    # Run Experiment B
-    results = run_fastlof_experiment(
-        X, y,
-        k_min=K_MIN,
-        k_max=K_MAX,
-        step=K_STEP,
-        threshold=THRESHOLD,
-        chunk_sizes=CHUNK_SIZES,
-        n_runs=N_RUNS,
-        dataset_filepath=DATASET_FILEPATH
-    )
+    # Run Experiment B for each threshold
+    print(f"\nTesting thresholds: {THRESHOLDS}")
+    for threshold in THRESHOLDS:
+        print(f"\n{'-'*80}")
+        print(f"Running with threshold = {threshold}")
+        print(f"{'-'*80}\n")
+        
+        results = run_fastlof_experiment(
+            X, y,
+            k_values=K_VALUES,
+            min_chunk_size=MIN_CHUNK_SIZE,
+            max_chunk_size=MAX_CHUNK_SIZE,
+            chunk_interval=CHUNK_INTERVAL,
+            threshold=threshold,
+            n_runs=N_RUNS,
+            dataset_filepath=DATASET_FILEPATH
+        )
     
     print(f"\n{'='*80}")
-    print(f"Experiment Complete!")
+    print(f"All Experiments Complete!")
     print(f"{'='*80}\n")
