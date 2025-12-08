@@ -11,7 +11,7 @@ global_settings:
   email_type: "FAIL,END"  # Options: BEGIN,END,FAIL,ALL
   
   # Working directory (will be auto-detected from script location)
-  work_dir: "/home/hu/hu_hu/hu_abdeal01/Final-FastLOF"
+  work_dir: "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiment_scripts"
   
   # Python command
   python_cmd: "python -u"
