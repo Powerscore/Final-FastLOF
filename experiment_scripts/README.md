@@ -1,6 +1,20 @@
 # Experiment Scripts
 
-This folder contains organized scripts for running LOF experiments on the cluster.
+This folder contains organized scripts for running LOF experiments locally or on SLURM clusters.
+
+## 🚀 Quick Start for SLURM Cluster
+
+**For cluster submission, see:**
+- **[SLURM_QUICKSTART.md](SLURM_QUICKSTART.md)** - 5-minute setup guide
+- **[SLURM_README.md](SLURM_README.md)** - Complete documentation
+
+```bash
+# On cluster: Submit all FastLOF experiments
+python slurm_submit.py
+
+# Check progress
+python check_results.py
+```
 
 ## Installation
 
@@ -80,9 +94,61 @@ You can edit parameters directly in each script:
 - `N_RUNS`: Number of repetitions
 - `FRACTION`: Dataset sampling fraction (for large datasets)
 
+## SLURM Cluster Submission
+
+For automated batch job submission on SLURM clusters:
+
+### Files
+- `slurm_config.yaml` - Resource configuration per dataset
+- `slurm_template.sh` - SLURM job script template
+- `slurm_submit.py` - Automated submission manager
+- `submit_jobs.sh` - Interactive wrapper script
+- `check_results.py` - Check experiment completion status
+
+### Quick Commands
+
+```bash
+# Generate and test (dry run)
+python slurm_submit.py --dry-run
+
+# Submit all FastLOF experiments (4 concurrent jobs)
+python slurm_submit.py
+
+# Submit specific datasets only
+python slurm_submit.py --dataset annthyroid-unsupervised-ad --dataset breast-cancer-unsupervised-ad
+
+# Resume after interruption
+python slurm_submit.py --resume
+
+# Check completion status
+python check_results.py
+```
+
+### Features
+- ✅ Automatic job generation for all 12 datasets
+- ✅ Resource allocation based on dataset size
+- ✅ Batch submission with configurable concurrency (default: 4 jobs)
+- ✅ Auto-queuing: submits next job when slots become available
+- ✅ Thread limiting (5 threads) to prevent overhead
+- ✅ State management: resume anytime with `--resume`
+- ✅ Live monitoring with status updates every 5 minutes
+- ✅ Email notifications (optional)
+
+### Resource Allocation
+| Dataset Size | CPUs | Memory | Time | Partition |
+|--------------|------|--------|------|-----------|
+| Small (<10k) | 16 | 32GB | 24h | `cpu` |
+| Medium (10k-100k) | 20-24 | 48-64GB | 36-48h | `cpu` |
+| Large (>100k) | 32 | 128-256GB | 72h | `cpu` |
+
+**Estimated total runtime**: 3-5 days with 4 concurrent jobs
+
+See **[SLURM_README.md](SLURM_README.md)** for complete documentation.
+
 ## Notes
 
 - Large datasets (creditcard, kdd99, shuttle) use sampling by default
 - All `plt.show()` calls have been removed from `experiments.py`
 - Results are saved relative to the project root directory
 - Scripts use relative imports, so they must be run from the project root
+- SLURM system designed for FastLOF experiments (can be adapted for Original LOF)

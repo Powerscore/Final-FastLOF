@@ -25,9 +25,8 @@ DATASET_NAME = "kdd99-unsupervised-ad"
 K_MIN = 10
 K_MAX = 50
 K_STEP = 10
-N_RUNS = 5  # Reduced for large dataset
-FRACTION = 0.05  # Use 5% of data (adjust as needed)
-
+N_RUNS = 10
+FRACTION = 1
 if __name__ == "__main__":
     print(f"\n{'='*80}")
     print(f"Original LOF Experiment - {DATASET_NAME}")

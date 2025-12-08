@@ -1,0 +1,128 @@
+# SLURM Resource Configuration for FastLOF Experiments
+# ======================================================
+# Configure resources per dataset based on estimated computational requirements
+
+global_settings:
+  # Thread limiting for all jobs
+  num_threads: 5
+  
+  # Email notifications (optional - set to your email)
+  email: alaa.ashraf.uni@gmail.com  # e.g., "your.email@uni.de"
+  email_type: "FAIL,END"  # Options: BEGIN,END,FAIL,ALL
+  
+  # Working directory (will be auto-detected from script location)
+  work_dir: "/home/hu/hu_hu/hu_abdeal01/Final-FastLOF"
+  
+  # Python command
+  python_cmd: "python -u"
+
+# Dataset-specific configurations
+# Priority groups: small, medium, large
+datasets:
+  # SMALL DATASETS (< 10k samples)
+  annthyroid-unsupervised-ad:
+    priority: 1
+    partition: "cpu"
+    cpus: 16
+    memory: "32G"
+    time: "24:00:00"
+    estimated_time: "~12 hours"
+    
+  breast-cancer-unsupervised-ad:
+    priority: 2
+    partition: "cpu"
+    cpus: 16
+    memory: "32G"
+    time: "24:00:00"
+    estimated_time: "~8 hours"
+    
+  dfki-artificial-3000-unsupervised-ad:
+    priority: 3
+    partition: "cpu"
+    cpus: 16
+    memory: "32G"
+    time: "24:00:00"
+    estimated_time: "~6 hours"
+  
+  # MEDIUM DATASETS (10k-100k samples)
+  pen-local-unsupervised-ad:
+    priority: 4
+    partition: "cpu"
+    cpus: 20
+    memory: "48G"
+    time: "36:00:00"
+    estimated_time: "~24 hours"
+    
+  pen-global-unsupervised-ad:
+    priority: 5
+    partition: "cpu"
+    cpus: 20
+    memory: "48G"
+    time: "36:00:00"
+    estimated_time: "~24 hours"
+  
+  PenDigits_withoutdupl_norm_v01:
+    priority: 6
+    partition: "cpu"
+    cpus: 20
+    memory: "48G"
+    time: "36:00:00"
+    estimated_time: "~20 hours"
+  
+  InternetAds_norm_02_v01:
+    priority: 7
+    partition: "cpu"
+    cpus: 24
+    memory: "64G"
+    time: "48:00:00"
+    estimated_time: "~30 hours"
+    
+  mammography:
+    priority: 8
+    partition: "cpu"
+    cpus: 24
+    memory: "64G"
+    time: "48:00:00"
+    estimated_time: "~36 hours"
+  
+  satellite-unsupervised-ad:
+    priority: 9
+    partition: "cpu"
+    cpus: 24
+    memory: "64G"
+    time: "48:00:00"
+    estimated_time: "~30 hours"
+    
+  shuttle-unsupervised-ad:
+    priority: 10
+    partition: "cpu"
+    cpus: 24
+    memory: "64G"
+    time: "48:00:00"
+    estimated_time: "~36 hours"
+  
+  # LARGE DATASETS (> 100k samples)
+  creditcard:
+    priority: 11
+    partition: "cpu"
+    cpus: 32
+    memory: "128G"
+    time: "72:00:00"
+    estimated_time: "~48-60 hours"
+    
+  kdd99-unsupervised-ad:
+    priority: 12
+    partition: "cpu"  # Can switch to "highmem" if needed
+    cpus: 32
+    memory: "256G"
+    time: "72:00:00"
+    estimated_time: "~60-72 hours"
+    fallback_partition: "highmem"  # If cpu fails due to memory
+
+# Job submission settings
+submission:
+  max_concurrent_jobs: 4  # Maximum number of jobs running at once
+  queue_buffer: 1  # How many extra jobs to queue ahead
+  check_interval: 300  # Seconds between status checks (5 minutes)
+  retry_failed: false  # Whether to auto-retry failed jobs
+  dry_run: false  # Set to true to test without actually submitting
