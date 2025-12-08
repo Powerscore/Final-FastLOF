@@ -1,0 +1,348 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2460110
+Job Name: fastlof_InternetAds_norm_02_v01
+Node: uc3n030.localdomain
+Started at: Mon Dec  8 05:26:14 PM CET 2025
+CPUs allocated: 24
+Memory allocated: 64G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: InternetAds_norm_02_v01 - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - InternetAds_norm_02_v01
+================================================================================
+
+Loading dataset: data/InternetAds_norm_02_v01.arff
+
+--- Dataset preview (first 5 rows) ---
+   att4  att5  att6  att7  att8  ...  att1556  att1557  att1558     id  Class
+0   1.0   0.0   0.0   0.0   0.0  ...      0.0      0.0      0.0  460.0   b'0'
+1   1.0   0.0   0.0   0.0   0.0  ...      0.0      0.0      0.0  461.0   b'0'
+2   1.0   0.0   0.0   0.0   0.0  ...      0.0      0.0      0.0  462.0   b'0'
+3   1.0   0.0   0.0   0.0   0.0  ...      0.0      0.0      0.0  463.0   b'0'
+4   0.0   0.0   0.0   0.0   0.0  ...      0.0      0.0      0.0  464.0   b'0'
+
+[5 rows x 1557 columns]
+--------------------------------------
+Dataset shape: (2867, 1556)
+Number of anomalies: 57 (1.99%)
+
+Testing thresholds: [0, 1.0, 1.01, 1.1, 1.2]
+
+--------------------------------------------------------------------------------
+Running with threshold = 0
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0199
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 1500 to 100 (step=100)
+
+--- Running baseline LOF ---
+  k=10 (ball_tree)... 10.7945s (kd_tree)... 6.7937s (brute)... 0.1675s
+  k=20 (ball_tree)... 10.7899s (kd_tree)... 9.1090s (brute)... 0.1480s
+  k=30 (ball_tree)... 10.7834s (kd_tree)... 10.2262s (brute)... 0.1504s
+  k=40 (ball_tree)... 10.7900s (kd_tree)... 10.7771s (brute)... 0.1534s
+  k=50 (ball_tree)... 10.8420s (kd_tree)... 11.1224s (brute)... 0.1568s
+
+Baseline algorithms:
+  LOF ball_tree (averaged): 10.7999s
+  LOF kd_tree (averaged): 9.6057s
+  LOF brute (averaged): 0.1552s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [1500, 1400, 1300, 1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
+
+--- Running FastLOF ---
+Chunk size 1500:
+  k=10... 0.5796s
+  k=20... 0.1051s
+  k=30... 0.1033s
+  k=40... 0.1107s
+  k=50... 0.1186s
+  Averaged: 0.2035s, corr=1.0000
+Chunk size 1400:
+  k=10... 0.1467s
+  k=20... 0.1244s
+  k=30... 0.1130s
+  k=40... 0.1145s
+  k=50... 0.1186s
+  Averaged: 0.1234s, corr=1.0000
+Chunk size 1300:
+  k=10... 0.1101s
+  k=20... 0.1246s
+  k=30... 0.1238s
+  k=40... 0.1650s
+  k=50... 0.2195s
+  Averaged: 0.1486s, corr=1.0000
+Chunk size 1200:
+  k=10... 0.1278s
+  k=20... 0.2145s
+  k=30... 0.1100s
+  k=40... 0.1501s
+  k=50... 0.1188s
+  Averaged: 0.1442s, corr=1.0000
+Chunk size 1100:
+  k=10... 0.1372s
+  k=20... 0.1220s
+  k=30... 0.1141s
+  k=40... 0.2318s
+  k=50... 0.1097s
+  Averaged: 0.1430s, corr=1.0000
+Chunk size 1000:
+  k=10... 0.1129s
+  k=20... 0.1137s
+  k=30... 0.1134s
+  k=40... 0.1165s
+  k=50... 0.1195s
+  Averaged: 0.1152s, corr=1.0000
+Chunk size 900:
+  k=10... 0.1058s
+  k=20... 0.1285s
+  k=30... 0.1099s
+  k=40... 0.1103s
+  k=50... 0.1120s
+  Averaged: 0.1133s, corr=1.0000
+Chunk size 800:
+  k=10... 0.1061s
+  k=20... 0.1069s
+  k=30... 0.1098s
+  k=40... 0.1144s
+  k=50... 0.1151s
+  Averaged: 0.1104s, corr=1.0000
+Chunk size 700:
+  k=10... 0.1478s
+  k=20... 0.1159s
+  k=30... 0.1131s
+  k=40... 0.1149s
+  k=50... 0.1146s
+  Averaged: 0.1213s, corr=1.0000
+Chunk size 600:
+  k=10... 0.1092s
+  k=20... 0.1103s
+  k=30... 0.1124s
+  k=40... 0.2722s
+  k=50... 0.1389s
+  Averaged: 0.1486s, corr=1.0000
+Chunk size 500:
+  k=10... 0.1198s
+  k=20... 0.1437s
+  k=30... 0.1235s
+  k=40... 0.1292s
+  k=50... 0.1686s
+  Averaged: 0.1370s, corr=1.0000
+Chunk size 400:
+  k=10... 0.1989s
+  k=20... 0.1394s
+  k=30... 0.1414s
+  k=40... 0.1405s
+  k=50... 0.1375s
+  Averaged: 0.1516s, corr=1.0000
+Chunk size 300:
+  k=10... 0.1476s
+  k=20... 0.1556s
+  k=30... 0.1515s
+  k=40... 0.1517s
+  k=50... 0.1555s
+  Averaged: 0.1524s, corr=1.0000
+Chunk size 200:
+  k=10... 0.1949s
+  k=20... 0.2044s
+  k=30... 0.1966s
+  k=40... 0.1931s
+  k=50... 0.2173s
+  Averaged: 0.2013s, corr=1.0000
+Chunk size 100:
+  k=10... 0.3157s
+  k=20... 0.3445s
+  k=30... 0.3450s
+  k=40... 0.3301s
+  k=50... 0.5280s
+  Averaged: 0.3727s, corr=1.0000
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t0/fastlof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1471: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  axes[0, 1].legend(loc='upper left', fontsize=8)
+Saved Experiment B plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t0/fastlof_summary.png
+Saved detail plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t0/fastlof_detail.png
+Saved FastLOF scatter plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t0/fastlof_scatter.png
+Saved FastLOF timing pies to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t0/fastlof_timing.png
+
+=== Experiment B Complete ===
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.0
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0199
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 1500 to 100 (step=100)
+
+--- Running baseline LOF ---
+  k=10 (ball_tree)... 10.7693s (kd_tree)... 6.7737s (brute)... 0.1446s
+  k=20 (ball_tree)... 10.7596s (kd_tree)... 9.2047s (brute)... 0.1479s
+  k=30 (ball_tree)... 10.7701s (kd_tree)... 10.2371s (brute)... 0.1507s
+  k=40 (ball_tree)... 10.7862s (kd_tree)... 10.8287s (brute)... 0.1535s
+  k=50 (ball_tree)... 10.7878s (kd_tree)... 11.2575s (brute)... 0.1564s
+
+Baseline algorithms:
+  LOF ball_tree (averaged): 10.7746s
+  LOF kd_tree (averaged): 9.6603s
+  LOF brute (averaged): 0.1506s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [1500, 1400, 1300, 1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
+
+--- Running FastLOF ---
+Chunk size 1500:
+  k=10... 0.1127s
+  k=20... 0.1020s
+  k=30... 0.1038s
+  k=40... 0.1048s
+  k=50... 0.1075s
+  Averaged: 0.1062s, corr=1.0000
+Chunk size 1400:
+  k=10... 0.1057s
+  k=20... 0.1099s
+  k=30... 0.1127s
+  k=40... 0.1133s
+  k=50... 0.1159s
+  Averaged: 0.1115s, corr=0.9993
+Chunk size 1300:
+  k=10... 0.1044s
+  k=20... 0.1048s
+  k=30... 0.1055s
+  k=40... 0.1091s
+  k=50... 0.1089s
+  Averaged: 0.1065s, corr=0.9972
+Chunk size 1200:
+  k=10... 0.1015s
+  k=20... 0.1040s
+  k=30... 0.1058s
+  k=40... 0.1080s
+  k=50... 0.1090s
+  Averaged: 0.1056s, corr=0.9969
+Chunk size 1100:
+  k=10... 0.1017s
+  k=20... 0.1047s
+  k=30... 0.1062s
+  k=40... 0.1066s
+  k=50... 0.1378s
+  Averaged: 0.1114s, corr=0.9943
+Chunk size 1000:
+  k=10... 0.1030s
+  k=20... 0.1062s
+  k=30... 0.1074s
+  k=40... 0.1078s
+  k=50... 0.1077s
+  Averaged: 0.1064s, corr=0.9967
+Chunk size 900:
+  k=10... 0.1026s
+  k=20... 0.1050s
+  k=30... 0.1063s
+  k=40... 0.1072s
+  k=50... 0.1122s
+  Averaged: 0.1067s, corr=0.9924
+Chunk size 800:
+  k=10... 0.1069s
+  k=20... 0.1080s
+  k=30... 0.1116s
+  k=40... 0.1121s
+  k=50... 0.1147s
+  Averaged: 0.1107s, corr=0.9925
+Chunk size 700:
+  k=10... 0.1499s
+  k=20... 0.1917s
+  k=30... 0.1713s
+  k=40... 0.1327s
+  k=50... 0.1453s
+  Averaged: 0.1582s, corr=0.9940
+Chunk size 600:
+  k=10... 0.1162s
+  k=20... 0.1193s
+  k=30... 0.1208s
+  k=40... 0.1297s
+  k=50... 0.1247s
+  Averaged: 0.1221s, corr=0.9887
+Chunk size 500:
+  k=10... 0.1214s
+  k=20... 0.1278s
+  k=30... 0.1315s
+  k=40... 0.1329s
+  k=50... 0.2034s
+  Averaged: 0.1434s, corr=0.9888
+Chunk size 400:
+  k=10... 0.1337s
+  k=20... 0.2215s
+  k=30... 0.1439s
+  k=40... 0.1471s
+  k=50... 0.1642s
+  Averaged: 0.1621s, corr=0.9767
+Chunk size 300:
+  k=10... 0.1662s
+  k=20... 0.1471s
+  k=30... 0.1548s
+  k=40... 0.1574s
+  k=50... 0.1584s
+  Averaged: 0.1568s, corr=0.9814
+Chunk size 200:
+  k=10... 0.1781s
+  k=20... 0.1897s
+  k=30... 0.1907s
+  k=40... 0.1961s
+  k=50... 0.2030s
+  Averaged: 0.1915s, corr=0.9752
+Chunk size 100:
+  k=10... 0.3036s
+  k=20... 0.3169s
+  k=30... 0.3249s
+  k=40... 0.3268s
+  k=50... 0.3540s
+  Averaged: 0.3252s, corr=0.9647
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t1.0/fastlof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1471: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  axes[0, 1].legend(loc='upper left', fontsize=8)
+Saved Experiment B plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t1.0/fastlof_summary.png
+Saved detail plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t1.0/fastlof_detail.png
+Saved FastLOF scatter plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t1.0/fastlof_scatter.png
+Saved FastLOF timing pies to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/InternetAds_norm_02_v01/fastlof_experiments/k10-50_t1.0/fastlof_timing.png
+
+=== Experiment B Complete ===
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.01
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0199
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 1500 to 100 (step=100)
+
+--- Running baseline LOF ---
+  k=10 (ball_tree)... 10.7337s (kd_tree)...
