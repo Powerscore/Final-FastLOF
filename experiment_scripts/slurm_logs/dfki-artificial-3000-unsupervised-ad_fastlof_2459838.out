@@ -1,0 +1,56 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2459838
+Job Name: fastlof_dfki-artificial-3000-unsupervised-ad
+Node: uc3n048.localdomain
+Started at: Mon Dec  8 05:09:52 PM CET 2025
+CPUs allocated: 16
+Memory allocated: 32G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: dfki-artificial-3000-unsupervised-ad - FastLOF
+========================================================================
+
+  File "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiment_scripts/dfki-artificial-3000-unsupervised-ad/run_fastlof.py", line 31
+    if __name__ == "_
+                     ^
+SyntaxError: EOL while scanning string literal
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Mon Dec  8 05:09:52 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n048
+Job ID: 2459838
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 00:04:16 core-walltime
+Job Wall-clock time: 00:00:16
+Memory Utilized: 9.99 MB
+Memory Efficiency: 0.03% of 32.00 GB (32.00 GB/node)

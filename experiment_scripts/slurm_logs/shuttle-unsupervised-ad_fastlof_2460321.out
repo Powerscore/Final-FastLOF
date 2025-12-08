@@ -1,0 +1,149 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2460321
+Job Name: fastlof_shuttle-unsupervised-ad
+Node: uc3n007.localdomain
+Started at: Mon Dec  8 05:44:39 PM CET 2025
+CPUs allocated: 24
+Memory allocated: 64G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: shuttle-unsupervised-ad - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - shuttle-unsupervised-ad
+================================================================================
+
+Loading dataset: data/shuttle-unsupervised-ad.csv (fraction=1)
+
+--- Dataset preview (first 5 rows) ---
+   108.0  3.0  109.0  0.0  72.0   7.0  1.0   36.0  36.0.1  o
+0   81.0  0.0   84.0  0.0 -14.0  -2.0  4.0  100.0    96.0  o
+1   81.0  0.0   84.0  0.0 -20.0  16.0  4.0  105.0   102.0  o
+2   76.0 -1.0   81.0  0.0 -42.0  -3.0  5.0  125.0   120.0  o
+3  105.0  0.0  107.0  2.0  70.0   0.0  1.0   37.0    36.0  o
+4   79.0  0.0   83.0 -1.0 -40.0   7.0  4.0  124.0   120.0  o
+--------------------------------------
+Dataset shape: (46464, 9)
+Number of anomalies: 878 (1.89%)
+
+Testing thresholds: [0, 1.0, 1.01, 1.1, 1.2]
+
+--------------------------------------------------------------------------------
+Running with threshold = 0
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0189
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 10000 to 500 (step=500)
+
+--- Running baseline LOF ---
+  k=10 (ball_tree)... 8.1502s (kd_tree)... 3.6366s (brute)... 1.4627s
+  k=20 (ball_tree)... 8.6172s (kd_tree)... 5.0858s (brute)... 1.7033s
+  k=30 (ball_tree)... 8.9479s (kd_tree)... 6.0217s (brute)... 1.8098s
+  k=40 (ball_tree)... 9.2145s (kd_tree)... 6.7426s (brute)... 1.8238s
+  k=50 (ball_tree)... 9.5285s (kd_tree)... 7.3915s (brute)... 1.8769s
+
+Baseline algorithms:
+  LOF ball_tree (averaged): 8.8916s
+  LOF kd_tree (averaged): 5.7757s
+  LOF brute (averaged): 1.7353s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [10000, 9500, 9000, 8500, 8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000, 3500, 3000, 2500, 2000, 1500, 1000, 500]
+
+--- Running FastLOF ---
+Chunk size 10000:
+  k=10... 1.3545s
+  k=20... 0.7724s
+  k=30... 0.7962s
+  k=40... 0.8039s
+  k=50... 0.9139s
+  Averaged: 0.9282s, corr=1.0000
+Chunk size 9500:
+  k=10... 0.7838s
+  k=20... 0.8491s
+  k=30... 0.8164s
+  k=40... 0.8190s
+  k=50... 1.2300s
+  Averaged: 0.8997s, corr=1.0000
+Chunk size 9000:
+  k=10... 1.3204s
+  k=20... 1.5925s
+  k=30... 1.5035s
+  k=40... 1.2606s
+  k=50... 0.9032s
+  Averaged: 1.3160s, corr=1.0000
+Chunk size 8500:
+  k=10... 1.1201s
+  k=20... 1.2252s
+  k=30... 1.2743s
+  k=40... 0.9652s
+  k=50... 0.8626s
+  Averaged: 1.0895s, corr=1.0000
+Chunk size 8000:
+  k=10... 0.8540s
+  k=20... 1.1228s
+  k=30... 1.0264s
+  k=40... 1.0979s
+  k=50... 0.9464s
+  Averaged: 1.0095s, corr=1.0000
+Chunk size 7500:
+  k=10... 0.7533s
+  k=20... 0.7704s
+  k=30... 0.8020s
+  k=40... 0.8342s
+  k=50... 0.8628s
+  Averaged: 0.8046s, corr=1.0000
+Chunk size 7000:
+  k=10... 0.7541s
+  k=20... 0.7749s
+  k=30... 0.9442s
+  k=40... 0.9603s
+  k=50... 0.8580s
+  Averaged: 0.8583s, corr=1.0000
+Chunk size 6500:
+  k=10... 0.8087s
+  k=20... 0.8975s
+  k=30... 0.8769s
+  k=40... 1.2624s
+  k=50... 2.1589s
+  Averaged: 1.2009s, corr=1.0000
+Chunk size 6000:
+  k=10... 2.0930s
+  k=20... 1.7296s
+  k=30... 1.4742s
+  k=40... 1.1352s
+  k=50... 0.9678s
+  Averaged: 1.4800s, corr=1.0000
+Chunk size 5500:
+  k=10... 0.8660s
+  k=20... 1.3087s
+  k=30... 1.3173s
+  k=40... 2.4837s
+  k=50... 2.8045s
+  Averaged: 1.7560s, corr=1.0000
+Chunk size 5000:
+  k=10...
