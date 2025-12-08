@@ -28,7 +28,7 @@ MIN_CHUNK_SIZE = 500
 MAX_CHUNK_SIZE = 10000
 CHUNK_INTERVAL = 500
 N_RUNS = 10
-FRACTION = 0.2  # Use 20% of data (adjust as needed)
+FRACTION = 1
 
 if __name__ == "__main__":
     print(f"\n{'='*80}")

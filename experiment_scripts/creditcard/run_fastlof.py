@@ -28,8 +28,7 @@ MIN_CHUNK_SIZE = 500
 MAX_CHUNK_SIZE = 10000
 CHUNK_INTERVAL = 500
 N_RUNS = 5  # Reduced for large dataset
-FRACTION = 0.1  # Use 10% of data (adjust as needed)
-
+FRACTION = 1
 if __name__ == "__main__":
     print(f"\n{'='*80}")
     print(f"FastLOF Experiment - {DATASET_NAME}")

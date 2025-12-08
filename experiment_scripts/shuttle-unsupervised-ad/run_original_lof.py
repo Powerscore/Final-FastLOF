@@ -26,7 +26,7 @@ K_MIN = 10
 K_MAX = 50
 K_STEP = 10
 N_RUNS = 10
-FRACTION = 0.2  # Use 20% of data (adjust as needed)
+FRACTION = 1
 
 if __name__ == "__main__":
     print(f"\n{'='*80}")
