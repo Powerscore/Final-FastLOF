@@ -62,3 +62,5 @@ if __name__ == "__main__":
     print(f"\n{'='*80}")
     print(f"All Experiments Complete!")
     print(f"{'='*80}\n")
+    
+    sys.exit(0)
