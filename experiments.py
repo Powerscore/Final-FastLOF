@@ -989,6 +989,7 @@ def plot_original_lof_results(dataset_filepath, baseline,
     ax.bar(labels, values, yerr=yerr, alpha=0.75, capsize=6)
     ax.set_title("Runtime Comparison")
     ax.set_ylabel("Time (seconds)")
+    ax.set_ylim(bottom=0)  # Ensure y-axis starts at 0 (time cannot be negative)
     ax.grid(True, axis='y', alpha=0.3)
 
     # ----------------------------------------------------------------------
@@ -1463,7 +1464,7 @@ def plot_fastlof_results(dataset_filepath, baseline_ball_tree, baseline_kd_tree,
                      edgecolor='black', alpha=0.9)
         )
     
-    axes[0, 1].set_ylim(top=max(bars_top) * 1.10 if bars_top else None)
+    axes[0, 1].set_ylim(bottom=0, top=max(bars_top) * 1.10 if bars_top else None)
     axes[0, 1].set_ylabel('Runtime (s)')
     axes[0, 1].set_title('Baseline runtimes')
     axes[0, 1].grid(True, axis='y', alpha=0.3)
@@ -1494,7 +1495,7 @@ def plot_fastlof_results(dataset_filepath, baseline_ball_tree, baseline_kd_tree,
         # If max is much larger than p95, cap at p95
         if max_runtime_top > p95 * 2:
             y_max = p95 * 1.15  # Add 15% margin above p95
-            axes[1, 0].set_ylim(top=y_max)
+            axes[1, 0].set_ylim(bottom=0, top=y_max)
             
             # Count and annotate clipped bars
             clipped = [(i, sorted_chunk_labels[i], bar_tops[i]) 
@@ -1507,9 +1508,9 @@ def plot_fastlof_results(dataset_filepath, baseline_ball_tree, baseline_kd_tree,
                                bbox=dict(boxstyle='round,pad=0.4', facecolor='yellow', 
                                         alpha=0.5, edgecolor='red'))
         else:
-            axes[1, 0].set_ylim(top=max_runtime_top * 1.05)
+            axes[1, 0].set_ylim(bottom=0, top=max_runtime_top * 1.05)
     else:
-        axes[1, 0].set_ylim(top=max_runtime_top * 1.05)
+        axes[1, 0].set_ylim(bottom=0, top=max_runtime_top * 1.05)
     
     # Add reference lines for all successful baseline algorithms
     for name in successful_baselines.keys():
