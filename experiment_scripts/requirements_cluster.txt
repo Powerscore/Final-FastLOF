@@ -1,0 +1,27 @@
+# Python Requirements for FastLOF Experiments on Cluster
+# ========================================================
+# Install with: pip install -r requirements_cluster.txt
+
+# Core scientific computing
+numpy>=1.21.0
+pandas>=1.3.0
+scipy>=1.7.0
+
+# Machine learning
+scikit-learn>=1.0.0
+
+# Visualization
+matplotlib>=3.4.0
+seaborn>=0.11.0
+
+# Outlier detection
+pyod>=0.9.0
+
+# Performance optimization
+numba>=0.54.0
+
+# Job management
+pyyaml>=5.4.0
+
+# Optional: progress bars
+tqdm>=4.62.0

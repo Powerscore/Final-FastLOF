@@ -25,7 +25,7 @@ DATASET_NAME = "kdd99-unsupervised-ad"
 K_MIN = 10
 K_MAX = 50
 K_STEP = 10
-N_RUNS = 5  # Reduced for large dataset
+N_RUNS = 10
 FRACTION = 1
 if __name__ == "__main__":
     print(f"\n{'='*80}")
