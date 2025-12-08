@@ -58,7 +58,7 @@ echo "Starting Experiment: pen-local-unsupervised-ad - FastLOF"
 echo "========================================================================"
 echo ""
 
-python -u experiment_scripts/pen-local-unsupervised-ad/run_fastlof.py 2>&1 | tee -a slurm_logs/pen-local-unsupervised-ad_fastlof_live.log
+python -u experiment_scripts/pen-local-unsupervised-ad/run_fastlof.py 2>&1 | tee -a experiment_scripts/slurm_logs/pen-local-unsupervised-ad_fastlof_live.log
 
 EXIT_CODE=$?
 

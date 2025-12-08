@@ -58,7 +58,7 @@ echo "Starting Experiment: creditcard - FastLOF"
 echo "========================================================================"
 echo ""
 
-python -u experiment_scripts/creditcard/run_fastlof.py 2>&1 | tee -a slurm_logs/creditcard_fastlof_live.log
+python -u experiment_scripts/creditcard/run_fastlof.py 2>&1 | tee -a experiment_scripts/slurm_logs/creditcard_fastlof_live.log
 
 EXIT_CODE=$?
 

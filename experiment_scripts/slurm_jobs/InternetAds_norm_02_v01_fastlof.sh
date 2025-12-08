@@ -58,7 +58,7 @@ echo "Starting Experiment: InternetAds_norm_02_v01 - FastLOF"
 echo "========================================================================"
 echo ""
 
-python -u experiment_scripts/InternetAds_norm_02_v01/run_fastlof.py 2>&1 | tee -a slurm_logs/InternetAds_norm_02_v01_fastlof_live.log
+python -u experiment_scripts/InternetAds_norm_02_v01/run_fastlof.py 2>&1 | tee -a experiment_scripts/slurm_logs/InternetAds_norm_02_v01_fastlof_live.log
 
 EXIT_CODE=$?
 

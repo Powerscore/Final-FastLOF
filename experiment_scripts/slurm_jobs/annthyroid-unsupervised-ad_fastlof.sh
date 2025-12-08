@@ -58,7 +58,7 @@ echo "Starting Experiment: annthyroid-unsupervised-ad - FastLOF"
 echo "========================================================================"
 echo ""
 
-python -u experiment_scripts/annthyroid-unsupervised-ad/run_fastlof.py 2>&1 | tee -a slurm_logs/annthyroid-unsupervised-ad_fastlof_live.log
+python -u experiment_scripts/annthyroid-unsupervised-ad/run_fastlof.py 2>&1 | tee -a experiment_scripts/slurm_logs/annthyroid-unsupervised-ad_fastlof_live.log
 
 EXIT_CODE=$?
 

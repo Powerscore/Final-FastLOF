@@ -58,7 +58,7 @@ echo "Starting Experiment: breast-cancer-unsupervised-ad - FastLOF"
 echo "========================================================================"
 echo ""
 
-python -u experiment_scripts/breast-cancer-unsupervised-ad/run_fastlof.py 2>&1 | tee -a slurm_logs/breast-cancer-unsupervised-ad_fastlof_live.log
+python -u experiment_scripts/breast-cancer-unsupervised-ad/run_fastlof.py 2>&1 | tee -a experiment_scripts/slurm_logs/breast-cancer-unsupervised-ad_fastlof_live.log
 
 EXIT_CODE=$?
 
