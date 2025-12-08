@@ -194,12 +194,34 @@ def _load_csv(filepath):
         
         # Check if last column might be labels
         last_col = df.iloc[:, -1]
-        if last_col.dtype == 'object' or not pd.api.types.is_numeric_dtype(last_col):
-            # Last column is non-numeric, treat as labels
+        last_col_name = str(df.columns[-1]).lower() if has_header else ""
+        
+        # Label column indicators
+        label_keywords = ['class', 'label', 'target', 'outlier', 'anomaly', 'ground_truth', 'gt']
+        is_label_name = any(keyword in last_col_name for keyword in label_keywords)
+        
+        # Check if column is binary (only 0/1 or -1/1)
+        unique_vals = last_col.unique()
+        is_binary = (len(unique_vals) <= 2 and 
+                    all(val in [0, 1, -1, 0.0, 1.0, -1.0] for val in unique_vals))
+        
+        if (last_col.dtype == 'object' or 
+            not pd.api.types.is_numeric_dtype(last_col) or 
+            is_label_name or 
+            is_binary):
+            # Last column is labels
             X = df.iloc[:, :-1].values.astype(float)
-            y = np.array([_label_from_value(val) for val in last_col], dtype=np.int32)
+            if pd.api.types.is_numeric_dtype(last_col):
+                # Numeric labels (0/1 or -1/1)
+                y = last_col.values.astype(np.int32)
+                # Convert -1/1 to 0/1 if needed
+                if -1 in y:
+                    y = np.where(y == -1, 0, 1)
+            else:
+                # Non-numeric labels (need conversion)
+                y = np.array([_label_from_value(val) for val in last_col], dtype=np.int32)
         else:
-            # All numeric
+            # All numeric, no labels
             X = df.values.astype(float)
             y = None
             

@@ -4,8 +4,8 @@
 #SBATCH --error=slurm_logs/creditcard_fastlof_%j.err
 #SBATCH --time=72:00:00
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=32
-#SBATCH --mem=128G
+#SBATCH --cpus-per-task=24
+#SBATCH --mem=64G
 #SBATCH --partition=cpu
 #SBATCH --mail-user=alaa.ashraf.uni@gmail.com
 #SBATCH --mail-type=FAIL,END
@@ -13,7 +13,7 @@
 # FastLOF Experiment - creditcard
 # ============================================================================
 # Generated automatically by slurm_submit.py
-# Estimated runtime: ~48-60 hours
+# Estimated runtime: ~36-48 hours
 # ============================================================================
 
 # Thread limiting to prevent overhead
@@ -31,7 +31,7 @@ echo "Job Name: $SLURM_JOB_NAME"
 echo "Node: $(hostname)"
 echo "Started at: $(date)"
 echo "CPUs allocated: $SLURM_CPUS_PER_TASK"
-echo "Memory allocated: 128G"
+echo "Memory allocated: 64G"
 echo "Partition: cpu"
 echo "Thread limit: 5"
 echo "========================================================================"
