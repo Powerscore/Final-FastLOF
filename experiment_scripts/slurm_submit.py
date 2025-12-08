@@ -403,7 +403,7 @@ def main():
     manager.pending_datasets = datasets_to_submit
     
     # Get max concurrent from args or config
-    max_concurrent = args.max_concurrent or manager.config['submission']['max_concurrent']
+    max_concurrent = args.max_concurrent or manager.config['submission']['max_concurrent_jobs']
     
     # Run submission loop
     try:
