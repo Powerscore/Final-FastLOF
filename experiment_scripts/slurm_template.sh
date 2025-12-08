@@ -57,7 +57,7 @@ echo "Starting Experiment: {DATASET_NAME} - FastLOF"
 echo "========================================================================"
 echo ""
 
-{PYTHON_CMD} {SCRIPT_PATH} 2>&1 | tee -a slurm_logs/{DATASET_NAME}_fastlof_live.log
+{PYTHON_CMD} {SCRIPT_PATH} 2>&1 | tee -a experiment_scripts/slurm_logs/{DATASET_NAME}_fastlof_live.log
 
 EXIT_CODE=$?
 
