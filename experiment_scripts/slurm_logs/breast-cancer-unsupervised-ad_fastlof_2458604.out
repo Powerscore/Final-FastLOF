@@ -1,0 +1,53 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2458604
+Job Name: fastlof_breast-cancer-unsupervised-ad
+Node: uc3n015.localdomain
+Started at: Mon Dec  8 03:53:05 PM CET 2025
+CPUs allocated: 16
+Memory allocated: 32G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: breast-cancer-unsupervised-ad - FastLOF
+========================================================================
+
+python: can't open file '/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/breast-cancer-unsupervised-ad/run_fastlof.py': [Errno 2] No such file or directory
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 1
+Completed at: Mon Dec  8 03:53:06 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n015
+Job ID: 2458604
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: FAILED (exit code 1)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 00:04:00 core-walltime
+Job Wall-clock time: 00:00:15
+Memory Utilized: 10.01 MB
+Memory Efficiency: 0.03% of 32.00 GB (32.00 GB/node)

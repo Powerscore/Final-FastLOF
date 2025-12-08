@@ -1,0 +1,64 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2459162
+Job Name: fastlof_breast-cancer-unsupervised-ad
+Node: uc3n011.localdomain
+Started at: Mon Dec  8 04:03:17 PM CET 2025
+CPUs allocated: 16
+Memory allocated: 32G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiment_scripts
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: breast-cancer-unsupervised-ad - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - breast-cancer-unsupervised-ad
+================================================================================
+
+Loading dataset: data/breast-cancer-unsupervised-ad.csv
+Traceback (most recent call last):
+  File "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiment_scripts/breast-cancer-unsupervised-ad/run_fastlof.py", line 38, in <module>
+    X, y = load_dataset(DATASET_FILEPATH)
+  File "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py", line 83, in load_dataset
+    raise FileNotFoundError(f"Dataset file not found: {filepath}")
+FileNotFoundError: Dataset file not found: data/breast-cancer-unsupervised-ad.csv
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Mon Dec  8 04:03:32 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n011
+Job ID: 2459162
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:00:03
+CPU Efficiency: 0.51% of 00:09:52 core-walltime
+Job Wall-clock time: 00:00:37
+Memory Utilized: 97.78 MB
+Memory Efficiency: 0.30% of 32.00 GB (32.00 GB/node)
