@@ -105,7 +105,7 @@ class SlurmJobManager:
             email_lines += f"#SBATCH --mail-type={global_config.get('email_type', 'FAIL,END')}"
         
         # Script path
-        script_path = f"{dataset_name}/run_fastlof.py"
+        script_path = f"experiment_scripts/{dataset_name}/run_fastlof.py"
         
         # Fill in template
         job_script = template.format(
