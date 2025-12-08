@@ -1,0 +1,16 @@
+# Core scientific computing
+numpy>=1.21.0
+pandas>=1.3.0
+scipy>=1.7.0
+
+# Machine learning
+scikit-learn>=1.0.0
+
+# Outlier detection
+pyod>=1.0.0
+
+# Performance optimization
+numba>=0.55.0
+
+# Visualization
+matplotlib>=3.4.0

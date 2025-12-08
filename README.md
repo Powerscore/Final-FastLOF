@@ -42,16 +42,23 @@ Experimental results are stored in `results/` directory:
 - **Visualization Suite**: Automated plotting and comparison charts
 - **Git LFS Integration**: Efficient storage of large result files
 
-## Requirements
+## Installation
 
-```
-numpy
-pandas
-matplotlib
-scikit-learn
-scipy
-pyod
-numba
+### Requirements
+
+See `requirements.txt` for all dependencies:
+- numpy
+- pandas
+- matplotlib
+- scikit-learn
+- scipy
+- pyod
+- numba
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
 ```
 
 ## Usage

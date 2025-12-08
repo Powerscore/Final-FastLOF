@@ -2,6 +2,16 @@
 
 This folder contains organized scripts for running LOF experiments on the cluster.
 
+## Installation
+
+Before running experiments, install required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Required packages: numpy, pandas, matplotlib, scikit-learn, scipy, pyod, numba
+
 ## Structure
 
 Each dataset has its own subfolder with two experiment scripts:
