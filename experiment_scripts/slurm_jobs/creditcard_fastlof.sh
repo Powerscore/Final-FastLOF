@@ -2,7 +2,7 @@
 #SBATCH --job-name=fastlof_creditcard
 #SBATCH --output=slurm_logs/creditcard_fastlof_%j.out
 #SBATCH --error=slurm_logs/creditcard_fastlof_%j.err
-#SBATCH --time=72:00:00
+#SBATCH --time=71:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=64G
