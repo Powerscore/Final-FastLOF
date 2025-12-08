@@ -105,19 +105,18 @@ datasets:
   creditcard:
     priority: 11
     partition: "cpu"
-    cpus: 32
-    memory: "128G"
-    time: "72:00:00"
-    estimated_time: "~48-60 hours"
+    cpus: 24
+    memory: "64G"
+    time: "71:00:00"
+    estimated_time: "~36-48 hours"
     
   kdd99-unsupervised-ad:
     priority: 12
-    partition: "cpu"  # Can switch to "highmem" if needed
-    cpus: 32
-    memory: "256G"
-    time: "72:00:00"
-    estimated_time: "~60-72 hours"
-    fallback_partition: "highmem"  # If cpu fails due to memory
+    partition: "cpu"
+    cpus: 24
+    memory: "64G"
+    time: "71:00:00"
+    estimated_time: "~36-48 hours"
 
 # Job submission settings
 submission:
