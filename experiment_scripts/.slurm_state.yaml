@@ -6,3 +6,30 @@ submitted_jobs:
   http: DRYRUN_http
   mulcross: DRYRUN_mulcross
 timestamp: '2025-12-09T15:32:54.454877'
+completed_jobs:
+- mammography
+- pen-global-unsupervised-ad
+- PenDigits_withoutdupl_norm_v01
+- pen-local-unsupervised-ad
+- annthyroid-unsupervised-ad
+- shuttle-unsupervised-ad
+- satellite-unsupervised-ad
+- InternetAds_norm_02_v01
+- breast-cancer-unsupervised-ad
+- dfki-artificial-3000-unsupervised-ad
+failed_jobs: []
+pending_datasets: []
+submitted_jobs:
+  InternetAds_norm_02_v01: '2460110'
+  PenDigits_withoutdupl_norm_v01: '2459918'
+  annthyroid-unsupervised-ad: '2459836'
+  breast-cancer-unsupervised-ad: '2459837'
+  creditcard: '2460356'
+  dfki-artificial-3000-unsupervised-ad: '2459838'
+  kdd99-unsupervised-ad: '2460390'
+  mammography: '2460250'
+  pen-global-unsupervised-ad: '2459917'
+  pen-local-unsupervised-ad: '2459839'
+  satellite-unsupervised-ad: '2460251'
+  shuttle-unsupervised-ad: '2460321'
+timestamp: '2025-12-08T21:06:23.986179'
