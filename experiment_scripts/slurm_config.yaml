@@ -117,6 +117,31 @@ datasets:
     memory: "64G"
     time: "71:00:00"
     estimated_time: "~36-48 hours"
+  
+  # NEWLY ADDED DATASETS
+  ForestCover:
+    priority: 13
+    partition: "cpu"
+    cpus: 24
+    memory: "64G"
+    time: "71:00:00"
+    estimated_time: "~30-36 hours"
+    
+  http:
+    priority: 14
+    partition: "cpu"
+    cpus: 20
+    memory: "48G"
+    time: "71:00:00"
+    estimated_time: "~24 hours"
+    
+  mulcross:
+    priority: 15
+    partition: "cpu"
+    cpus: 20
+    memory: "48G"
+    time: "71:00:00"
+    estimated_time: "~20 hours"
 
 # Job submission settings
 submission:
