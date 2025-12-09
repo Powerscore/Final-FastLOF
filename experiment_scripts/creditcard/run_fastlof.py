@@ -27,7 +27,7 @@ THRESHOLDS = [1.1, 1.2]  # List of thresholds to test
 MIN_CHUNK_SIZE = 500
 MAX_CHUNK_SIZE = 10000
 CHUNK_INTERVAL = 500
-N_RUNS = 5  # Reduced for large dataset
+N_RUNS = 1  # Reduced for large dataset
 FRACTION = 1
 if __name__ == "__main__":
     print(f"\n{'='*80}")
