@@ -26,7 +26,7 @@ THRESHOLDS = [0, 1.0, 1.01, 1.1, 1.2]  # List of thresholds to test
 MIN_CHUNK_SIZE = 100
 MAX_CHUNK_SIZE = 3000
 CHUNK_INTERVAL = 100
-N_RUNS = 10
+N_RUNS = 1
 
 if __name__ == "__main__":
     print(f"\n{'='*80}")
