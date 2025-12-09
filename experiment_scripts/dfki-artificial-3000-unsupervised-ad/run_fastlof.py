@@ -28,8 +28,7 @@ MAX_CHUNK_SIZE = 1500
 CHUNK_INTERVAL = 50
 N_RUNS = 10
 
-if __name__ == "_
-_main__":
+if __name__ == "__main__":
     print(f"\n{'='*80}")
     print(f"FastLOF Experiment - {DATASET_NAME}")
     print(f"{'='*80}\n")
