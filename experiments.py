@@ -151,13 +151,22 @@ def _label_from_value(value):
     int
         1 for anomaly, 0 for normal
     """
+    # Handle numeric values directly
+    if isinstance(value, (int, float, np.integer, np.floating)):
+        # If already 0 or 1, return as-is
+        if value in [0, 0.0]:
+            return 0
+        elif value in [1, 1.0]:
+            return 1
+        # Otherwise convert to string for text matching
+    
     if isinstance(value, (bytes, bytearray)):
         value = value.decode('utf-8')
     
     value_str = str(value).strip().strip('"').strip("'").lower()
     
     anomaly_labels = {
-        '1', 'anomaly', 'attack', 'outlier', 'abnormal', 'yes', 'true',
+        '1', '1.0', 'anomaly', 'attack', 'outlier', 'abnormal', 'yes', 'true',
         'o', 'outliers', 'anomalous', 'attack.', 'anomaly.', 'outlier.', 'abnormal.'
     }
     
@@ -290,6 +299,82 @@ def _load_mat(filepath):
         
         return X, y
         
+    except NotImplementedError:
+        # Try h5py for MATLAB v7.3 files
+        try:
+            import h5py
+            with h5py.File(filepath, 'r') as f:
+                # Find data matrix
+                X = None
+                if 'X' in f.keys():
+                    X = np.array(f['X']).T  # h5py transposes data
+                elif 'data' in f.keys():
+                    X = np.array(f['data']).T
+                else:
+                    # Search for largest 2D array
+                    potential_X = None
+                    max_size = 0
+                    for key in f.keys():
+                        if not key.startswith('__'):
+                            value = f[key]
+                            if isinstance(value, h5py.Dataset) and len(value.shape) == 2:
+                                if value.size > max_size:
+                                    potential_X = np.array(value).T
+                                    max_size = value.size
+                    
+                    if potential_X is not None:
+                        X = potential_X
+                    else:
+                        raise ValueError(
+                            f"Could not find a suitable 2D data array in .mat file. "
+                            f"Available keys: {list(f.keys())}"
+                        )
+                
+                X = X.astype(float)
+                
+                # Preview .mat data
+                try:
+                    n_cols = X.shape[1]
+                    col_names = [f"f{i}" for i in range(n_cols)]
+                    preview_df = pd.DataFrame(X[:5, :], columns=col_names)
+                    print("\n--- Dataset preview (first 5 rows) [from .mat X using h5py] ---")
+                    print(preview_df.head())
+                    print("--------------------------------------")
+                except Exception as e:
+                    print(f"(Preview for .mat skipped due to error: {e})")
+                
+                # Find labels
+                y = None
+                for label_key in ['y', 'Y', 'labels', 'label']:
+                    if label_key in f.keys():
+                        label_arr = np.array(f[label_key])
+                        # Handle different shapes
+                        if label_arr.ndim == 2:
+                            if label_arr.shape[0] == 1:
+                                label_arr = label_arr[0]
+                            elif label_arr.shape[1] == 1:
+                                label_arr = label_arr[:, 0]
+                            else:
+                                label_arr = label_arr.flatten()
+                        else:
+                            label_arr = label_arr.flatten()
+                        
+                        if label_arr.size == X.shape[0]:
+                            y = np.array(
+                                [_label_from_value(val) for val in label_arr], 
+                                dtype=np.int32
+                            )
+                            break
+                
+                return X, y
+        except ImportError:
+            raise Exception(
+                f"Error loading .mat file '{filepath}': "
+                "This is a MATLAB v7.3 file which requires h5py. "
+                "Please install h5py: pip install h5py"
+            )
+        except Exception as e:
+            raise Exception(f"Error loading .mat file '{filepath}' with h5py: {e}")
     except Exception as e:
         raise Exception(f"Error loading .mat file '{filepath}': {e}")
 

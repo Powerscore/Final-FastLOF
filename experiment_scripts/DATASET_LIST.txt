@@ -1,7 +1,7 @@
 All Dataset Scripts for Cluster Submission
 ===========================================
 
-Total: 12 datasets × 2 experiments = 24 scripts
+Total: 15 datasets × 2 experiments = 30 scripts
 
 Original LOF Experiments (Experiment A)
 ---------------------------------------
@@ -9,9 +9,12 @@ experiment_scripts/annthyroid-unsupervised-ad/run_original_lof.py
 experiment_scripts/breast-cancer-unsupervised-ad/run_original_lof.py
 experiment_scripts/creditcard/run_original_lof.py
 experiment_scripts/dfki-artificial-3000-unsupervised-ad/run_original_lof.py
+experiment_scripts/ForestCover/run_original_lof.py
+experiment_scripts/http/run_original_lof.py
 experiment_scripts/InternetAds_norm_02_v01/run_original_lof.py
 experiment_scripts/kdd99-unsupervised-ad/run_original_lof.py
 experiment_scripts/mammography/run_original_lof.py
+experiment_scripts/mulcross/run_original_lof.py
 experiment_scripts/pen-global-unsupervised-ad/run_original_lof.py
 experiment_scripts/pen-local-unsupervised-ad/run_original_lof.py
 experiment_scripts/PenDigits_withoutdupl_norm_v01/run_original_lof.py
@@ -24,9 +27,12 @@ experiment_scripts/annthyroid-unsupervised-ad/run_fastlof.py
 experiment_scripts/breast-cancer-unsupervised-ad/run_fastlof.py
 experiment_scripts/creditcard/run_fastlof.py
 experiment_scripts/dfki-artificial-3000-unsupervised-ad/run_fastlof.py
+experiment_scripts/ForestCover/run_fastlof.py
+experiment_scripts/http/run_fastlof.py
 experiment_scripts/InternetAds_norm_02_v01/run_fastlof.py
 experiment_scripts/kdd99-unsupervised-ad/run_fastlof.py
 experiment_scripts/mammography/run_fastlof.py
+experiment_scripts/mulcross/run_fastlof.py
 experiment_scripts/pen-global-unsupervised-ad/run_fastlof.py
 experiment_scripts/pen-local-unsupervised-ad/run_fastlof.py
 experiment_scripts/PenDigits_withoutdupl_norm_v01/run_fastlof.py
