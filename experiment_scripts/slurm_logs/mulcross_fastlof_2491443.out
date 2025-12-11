@@ -1,0 +1,123 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2491443
+Job Name: fastlof_mulcross
+Node: uc3n008.localdomain
+Started at: Wed Dec 10 08:28:45 AM CET 2025
+CPUs allocated: 20
+Memory allocated: 48G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: mulcross - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - mulcross
+================================================================================
+
+Loading dataset: data/mulcross.arff
+
+--- Dataset preview (first 5 rows) ---
+         V1        V2        V3        V4     Target
+0 -0.203950  0.363011  1.013766  0.187131  b'Normal'
+1 -0.761118  2.436424  0.681846  0.654366  b'Normal'
+2 -0.209979  1.131098 -0.282180 -0.202210  b'Normal'
+3  0.836812  0.650342 -0.426900 -0.305281  b'Normal'
+4  0.454204  1.560128 -0.204841  0.219233  b'Normal'
+--------------------------------------
+Dataset shape: (262144, 4)
+Number of anomalies: 26214 (10.00%)
+
+Testing thresholds: [0, 1.0, 1.01, 1.1, 1.2]
+
+--------------------------------------------------------------------------------
+Running with threshold = 0
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.1000
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 1500 to 100 (step=100)
+
+--- Running baseline LOF ---
+  k=10 (ball_tree)... 27.1605s (kd_tree)... 2.7969s (brute)... 31.5008s
+  k=20 (ball_tree)... 31.6696s (kd_tree)... 3.5574s (brute)... 43.4708s
+  k=30 (ball_tree)... 223.5015s (kd_tree)... 20.0045s (brute)... 49.9802s
+  k=40 (ball_tree)... 828.4928s (kd_tree)... 5.5270s (brute)... 38.5617s
+  k=50 (ball_tree)... 44.8291s (kd_tree)... 6.2126s (brute)... 41.9698s
+
+Baseline algorithms:
+  LOF ball_tree (averaged): 231.1307s
+  LOF kd_tree (averaged): 7.6197s
+  LOF brute (averaged): 41.0967s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [1500, 1400, 1300, 1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
+
+--- Running FastLOF ---
+Chunk size 1500:
+  k=10... 33.2315s
+  k=20... 133.0002s
+  k=30... 39.3150s
+  k=40... 41.3197s
+  k=50... 45.2028s
+  Averaged: 58.4138s, corr=1.0000
+Chunk size 1400:
+  k=10... 32.2892s
+  k=20... 36.1955s
+  k=30... 38.5614s
+  k=40... 42.6062s
+  k=50... 58.9967s
+  Averaged: 41.7298s, corr=1.0000
+Chunk size 1300:
+  k=10... 31.4247s
+  k=20... 37.7837s
+  k=30... 226.5690s
+  k=40... 43.2356s
+  k=50... 46.5841s
+  Averaged: 77.1194s, corr=1.0000
+Chunk size 1200:
+  k=10... 32.8883s
+  k=20... 40.0942s
+  k=30... 56.0137s
+  k=40... 43.9404s
+  k=50... 49.4707s
+  Averaged: 44.4815s, corr=1.0000
+Chunk size 1100:
+  k=10... 35.9407s
+  k=20... 41.7866s
+  k=30... 44.5684s
+  k=40... 50.2917s
+  k=50... 204.7228s
+  Averaged: 75.4620s, corr=1.0000
+Chunk size 1000:
+  k=10... 39.7900s
+  k=20... 43.7911s
+  k=30... 741.6445s
+  k=40... 693.7114s
+  k=50... 488.0208s
+  Averaged: 401.3916s, corr=1.0000
+Chunk size 900:
+  k=10... 506.0354s
+  k=20... 876.5059s
+  k=30...
