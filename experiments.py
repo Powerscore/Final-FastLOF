@@ -1209,6 +1209,8 @@ def run_fastlof_experiment(
     n_runs=5,
     threshold=1.2,
     dataset_filepath=None,
+    skip_ball_tree=False,
+    skip_kd_tree=False,
 ):
     """
     Compare FastLOF against standard LOF across chunk sizes and k values.
@@ -1237,6 +1239,10 @@ def run_fastlof_experiment(
         Distance threshold for FastLOF active set pruning
     dataset_filepath : str or None, optional
         Path to dataset for results organization
+    skip_ball_tree : bool, optional (default=False)
+        If True, skip ball_tree algorithm in baseline LOF tests
+    skip_kd_tree : bool, optional (default=False)
+        If True, skip kd_tree algorithm in baseline LOF tests
         
     Returns
     -------
@@ -1260,7 +1266,23 @@ def run_fastlof_experiment(
     
     # Run baseline LOF for each k value with multiple algorithms
     print("\n--- Running baseline LOF ---")
-    algorithms_to_test = ['ball_tree', 'kd_tree', 'brute']
+    
+    # Build list of algorithms to test based on skip parameters
+    algorithms_to_test = []
+    if not skip_ball_tree:
+        algorithms_to_test.append('ball_tree')
+    if not skip_kd_tree:
+        algorithms_to_test.append('kd_tree')
+    algorithms_to_test.append('brute')  # Always include brute
+    
+    if skip_ball_tree or skip_kd_tree:
+        skipped = []
+        if skip_ball_tree:
+            skipped.append('ball_tree')
+        if skip_kd_tree:
+            skipped.append('kd_tree')
+        print(f"Skipping algorithms: {', '.join(skipped)}")
+    
     baseline_lists = {alg: [] for alg in algorithms_to_test}
     baseline_scores_lists = {alg: [] for alg in algorithms_to_test}
     failed_algorithms = set()
