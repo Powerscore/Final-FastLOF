@@ -1,7 +1,7 @@
 """
 Original LOF Experiment - Mulcross Dataset
 ===========================================
-Runs Experiment A (baseline: sklearn's LOF) on mulcross dataset.
+Runs Experiment A (Original LOF vs Single-k LOF) on mulcross dataset.
 """
 
 import sys
@@ -21,7 +21,9 @@ DATASET_FILEPATH = "data/mulcross.arff"
 DATASET_NAME = "mulcross"
 
 # Experiment parameters
-K_VALUES = [10, 20, 30, 40, 50]
+K_MIN = 10
+K_MAX = 50
+K_STEP = 10
 N_RUNS = 10
 
 if __name__ == "__main__":
@@ -38,7 +40,9 @@ if __name__ == "__main__":
     # Run Experiment A
     results = run_original_lof_experiment(
         X, y,
-        k_values=K_VALUES,
+        k_min=K_MIN,
+        k_max=K_MAX,
+        step=K_STEP,
         n_runs=N_RUNS,
         dataset_filepath=DATASET_FILEPATH
     )

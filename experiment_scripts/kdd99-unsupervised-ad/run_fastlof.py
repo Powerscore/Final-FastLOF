@@ -27,7 +27,7 @@ THRESHOLDS = [1.1]  # List of thresholds to test
 MIN_CHUNK_SIZE = 500
 MAX_CHUNK_SIZE = 10000
 CHUNK_INTERVAL = 500
-N_RUNS = 1  # Reduced for large dataset
+N_RUNS = 5  # Reduced for large dataset
 FRACTION = 1
 if __name__ == "__main__":
     print(f"\n{'='*80}")
@@ -55,7 +55,9 @@ if __name__ == "__main__":
             chunk_interval=CHUNK_INTERVAL,
             threshold=threshold,
             n_runs=N_RUNS,
-            dataset_filepath=DATASET_FILEPATH
+            dataset_filepath=DATASET_FILEPATH,
+            skip_ball_tree=True,  # Skip ball_tree (too slow for large dataset)
+            skip_kd_tree=True     # Skip kd_tree (use brute force only)
         )
     
     print(f"\n{'='*80}")
