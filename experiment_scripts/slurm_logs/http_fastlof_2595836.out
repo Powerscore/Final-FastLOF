@@ -1,0 +1,84 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2595836
+Job Name: fastlof_http
+Node: uc3n039.localdomain
+Started at: Fri Dec 12 07:34:49 PM CET 2025
+CPUs allocated: 20
+Memory allocated: 48G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: http - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - http
+================================================================================
+
+Loading dataset: data/http.mat
+Traceback (most recent call last):
+  File "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py", line 246, in _load_mat
+    mat_data = scipy.io.loadmat(filepath)
+  File "/home/hu/hu_hu/hu_abdeal01/.local/lib/python3.9/site-packages/scipy/io/matlab/_mio.py", line 226, in loadmat
+    MR, _ = mat_reader_factory(f, **kwargs)
+  File "/home/hu/hu_hu/hu_abdeal01/.local/lib/python3.9/site-packages/scipy/io/matlab/_mio.py", line 80, in mat_reader_factory
+    raise NotImplementedError('Please use HDF reader for matlab v7.3 '
+NotImplementedError: Please use HDF reader for matlab v7.3 files, e.g. h5py
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py", line 305, in _load_mat
+    import h5py
+ModuleNotFoundError: No module named 'h5py'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiment_scripts/http/run_fastlof.py", line 38, in <module>
+    X, y = load_dataset(DATASET_FILEPATH)
+  File "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py", line 104, in load_dataset
+    X, y = _load_mat(filepath)
+  File "/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py", line 371, in _load_mat
+    raise Exception(
+Exception: Error loading .mat file 'data/http.mat': This is a MATLAB v7.3 file which requires h5py. Please install h5py: pip install h5py
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Fri Dec 12 07:34:56 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n039
+Job ID: 2595836
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 00:00:03
+CPU Efficiency: 0.68% of 00:07:20 core-walltime
+Job Wall-clock time: 00:00:22
+Memory Utilized: 9.97 MB
+Memory Efficiency: 0.02% of 48.00 GB (48.00 GB/node)

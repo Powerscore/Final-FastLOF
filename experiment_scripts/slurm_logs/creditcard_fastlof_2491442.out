@@ -1,0 +1,79 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2491442
+Job Name: fastlof_creditcard
+Node: uc3n049.localdomain
+Started at: Wed Dec 10 02:58:39 AM CET 2025
+CPUs allocated: 24
+Memory allocated: 64G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: creditcard - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - creditcard
+================================================================================
+
+Loading dataset: data/creditcard.csv (fraction=1)
+
+--- Dataset preview (first 5 rows) ---
+   Time        V1        V2        V3  ...       V27       V28  Amount  Class
+0     0 -1.359807 -0.072781  2.536347  ...  0.133558 -0.021053  149.62      0
+1     0  1.191857  0.266151  0.166480  ... -0.008983  0.014724    2.69      0
+2     1 -1.358354 -1.340163  1.773209  ... -0.055353 -0.059752  378.66      0
+3     1 -0.966272 -0.185226  1.792993  ...  0.062723  0.061458  123.50      0
+4     2 -1.158233  0.877737  1.548718  ...  0.219422  0.215153   69.99      0
+
+[5 rows x 31 columns]
+--------------------------------------
+Dataset shape: (284807, 30)
+Number of anomalies: 492 (0.17%)
+
+Testing thresholds: [1.1, 1.2]
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.1
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0017
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 10000 to 500 (step=500)
+
+--- Running baseline LOF ---
+  k=10 (ball_tree)... 26923.2608s (kd_tree)... 12583.8937s (brute)... 68.6641s
+  k=20 (ball_tree)...
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n049
+Job ID: 2491442
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: CANCELLED (exit code 0)
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 23-14:02:48 core-walltime
+Job Wall-clock time: 23:35:07
+Memory Utilized: 369.00 MB
+Memory Efficiency: 0.56% of 64.00 GB (64.00 GB/node)

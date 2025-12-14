@@ -1,0 +1,607 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2571012
+Job Name: fastlof_mulcross
+Node: uc3n058.localdomain
+Started at: Thu Dec 11 06:59:57 PM CET 2025
+CPUs allocated: 20
+Memory allocated: 48G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: mulcross - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - mulcross
+================================================================================
+
+Loading dataset: data/mulcross.arff
+
+--- Dataset preview (first 5 rows) ---
+         V1        V2        V3        V4     Target
+0 -0.203950  0.363011  1.013766  0.187131  b'Normal'
+1 -0.761118  2.436424  0.681846  0.654366  b'Normal'
+2 -0.209979  1.131098 -0.282180 -0.202210  b'Normal'
+3  0.836812  0.650342 -0.426900 -0.305281  b'Normal'
+4  0.454204  1.560128 -0.204841  0.219233  b'Normal'
+--------------------------------------
+Dataset shape: (262144, 4)
+Number of anomalies: 26214 (10.00%)
+
+Testing thresholds: [1.01, 1.1, 1.2]
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.01
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.1000
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 10000 to 500 (step=500)
+
+--- Running baseline LOF ---
+Skipping algorithms: ball_tree
+  k=10 (kd_tree)... 55.2589s (brute)... 35.1466s
+  k=20 (kd_tree)... 26.2393s (brute)... 35.1256s
+  k=30 (kd_tree)... 38.4223s (brute)... 35.0433s
+  k=40 (kd_tree)... 46.4463s (brute)... 37.0349s
+  k=50 (kd_tree)... 41.9079s (brute)... 40.0592s
+
+Baseline algorithms:
+  LOF kd_tree (averaged): 41.6549s
+  LOF brute (averaged): 36.4819s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [10000, 9500, 9000, 8500, 8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000, 3500, 3000, 2500, 2000, 1500, 1000, 500]
+
+--- Running FastLOF ---
+Chunk size 10000:
+  k=10... 839.0284s
+  k=20... 10.1415s
+  k=30... 9.7736s
+  k=40... 9.6305s
+  k=50... 77.3033s
+  Averaged: 189.1755s, corr=0.9250
+Chunk size 9500:
+  k=10... 97.6335s
+  k=20... 42.9079s
+  k=30... 120.6345s
+  k=40... 95.8142s
+  k=50... 10.5389s
+  Averaged: 73.5058s, corr=0.9228
+Chunk size 9000:
+  k=10... 11.0173s
+  k=20... 11.3293s
+  k=30... 11.9661s
+  k=40... 10.0196s
+  k=50... 10.5196s
+  Averaged: 10.9704s, corr=0.9216
+Chunk size 8500:
+  k=10... 10.7602s
+  k=20... 10.9601s
+  k=30... 11.2599s
+  k=40... 10.0564s
+  k=50... 10.5390s
+  Averaged: 10.7151s, corr=0.9186
+Chunk size 8000:
+  k=10... 11.3003s
+  k=20... 11.6278s
+  k=30... 11.1130s
+  k=40... 9.8628s
+  k=50... 10.9676s
+  Averaged: 10.9743s, corr=0.9162
+Chunk size 7500:
+  k=10... 11.4503s
+  k=20... 11.1850s
+  k=30... 10.8980s
+  k=40... 10.1150s
+  k=50... 10.0841s
+  Averaged: 10.7465s, corr=0.9134
+Chunk size 7000:
+  k=10... 11.4140s
+  k=20... 11.4247s
+  k=30... 11.2736s
+  k=40... 10.8143s
+  k=50... 10.3480s
+  Averaged: 11.0549s, corr=0.9116
+Chunk size 6500:
+  k=10... 11.5396s
+  k=20... 11.3663s
+  k=30... 11.6122s
+  k=40... 10.5615s
+  k=50... 9.9175s
+  Averaged: 10.9994s, corr=0.9084
+Chunk size 6000:
+  k=10... 11.5925s
+  k=20... 11.9163s
+  k=30... 11.7848s
+  k=40... 10.6724s
+  k=50... 10.4472s
+  Averaged: 11.2826s, corr=0.9053
+Chunk size 5500:
+  k=10... 11.5806s
+  k=20... 12.3182s
+  k=30... 12.4427s
+  k=40... 11.1895s
+  k=50... 11.3419s
+  Averaged: 11.7746s, corr=0.9009
+Chunk size 5000:
+  k=10... 12.5041s
+  k=20... 12.8111s
+  k=30... 13.5326s
+  k=40... 11.9959s
+  k=50... 11.9377s
+  Averaged: 12.5563s, corr=0.8994
+Chunk size 4500:
+  k=10... 12.7332s
+  k=20... 12.9588s
+  k=30... 13.5010s
+  k=40... 12.7090s
+  k=50... 11.9814s
+  Averaged: 12.7767s, corr=0.8958
+Chunk size 4000:
+  k=10... 13.0631s
+  k=20... 13.3809s
+  k=30... 13.7964s
+  k=40... 13.3552s
+  k=50... 12.9139s
+  Averaged: 13.3019s, corr=0.8952
+Chunk size 3500:
+  k=10... 13.4778s
+  k=20... 13.7617s
+  k=30... 14.6047s
+  k=40... 15.0399s
+  k=50... 14.2266s
+  Averaged: 14.2221s, corr=0.8881
+Chunk size 3000:
+  k=10... 14.2533s
+  k=20... 14.4296s
+  k=30... 15.1757s
+  k=40... 15.7101s
+  k=50... 15.7813s
+  Averaged: 15.0700s, corr=0.8839
+Chunk size 2500:
+  k=10... 14.7914s
+  k=20... 15.3661s
+  k=30... 16.7057s
+  k=40... 17.5497s
+  k=50... 18.1084s
+  Averaged: 16.5043s, corr=0.8849
+Chunk size 2000:
+  k=10... 15.0140s
+  k=20... 16.6692s
+  k=30... 18.7472s
+  k=40... 20.0706s
+  k=50... 21.5403s
+  Averaged: 18.4082s, corr=0.8879
+Chunk size 1500:
+  k=10... 17.1083s
+  k=20... 20.0231s
+  k=30... 22.9959s
+  k=40... 25.2537s
+  k=50... 27.9541s
+  Averaged: 22.6670s, corr=0.8966
+Chunk size 1000:
+  k=10... 21.3791s
+  k=20... 26.2988s
+  k=30... 31.0689s
+  k=40... 35.9991s
+  k=50... 39.5657s
+  Averaged: 30.8623s, corr=0.9199
+Chunk size 500:
+  k=10... 36.8645s
+  k=20... 48.2225s
+  k=30... 57.2710s
+  k=40... 68.4351s
+  k=50... 4986.9610s
+  Averaged: 1039.5508s, corr=0.9237
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.01/fastlof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1600: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  axes[0, 1].legend(loc='upper left', fontsize=8)
+Saved Experiment B plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.01/fastlof_summary.png
+Saved detail plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.01/fastlof_detail.png
+Saved FastLOF scatter plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.01/fastlof_scatter.png
+Saved FastLOF timing pies to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.01/fastlof_timing.png
+
+=== Experiment B Complete ===
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.1
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.1000
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 10000 to 500 (step=500)
+
+--- Running baseline LOF ---
+Skipping algorithms: ball_tree
+  k=10 (kd_tree)... 48.7167s (brute)... 30.3865s
+  k=20 (kd_tree)... 3.4674s (brute)... 30.5783s
+  k=30 (kd_tree)... 4.3651s (brute)... 30.9450s
+  k=40 (kd_tree)... 5.2484s (brute)... 31.1679s
+  k=50 (kd_tree)... 6.0590s (brute)... 31.4443s
+
+Baseline algorithms:
+  LOF kd_tree (averaged): 13.5713s
+  LOF brute (averaged): 30.9044s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [10000, 9500, 9000, 8500, 8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000, 3500, 3000, 2500, 2000, 1500, 1000, 500]
+
+--- Running FastLOF ---
+Chunk size 10000:
+  k=10... 3.7413s
+  k=20... 4.2103s
+  k=30... 5.1339s
+  k=40... 5.2143s
+  k=50... 5.7038s
+  Averaged: 4.8007s, corr=0.8219
+Chunk size 9500:
+  k=10... 3.7944s
+  k=20... 4.3616s
+  k=30... 4.7515s
+  k=40... 5.2215s
+  k=50... 5.6718s
+  Averaged: 4.7601s, corr=0.8166
+Chunk size 9000:
+  k=10... 3.6096s
+  k=20... 4.2030s
+  k=30... 4.7632s
+  k=40... 5.2243s
+  k=50... 6.0908s
+  Averaged: 4.7782s, corr=0.8127
+Chunk size 8500:
+  k=10... 3.5584s
+  k=20... 4.1795s
+  k=30... 4.7430s
+  k=40... 5.3284s
+  k=50... 5.7340s
+  Averaged: 4.7087s, corr=0.8082
+Chunk size 8000:
+  k=10... 3.5392s
+  k=20... 4.2674s
+  k=30... 4.7695s
+  k=40... 5.4789s
+  k=50... 5.9774s
+  Averaged: 4.8065s, corr=0.8015
+Chunk size 7500:
+  k=10... 3.7374s
+  k=20... 4.0824s
+  k=30... 4.7430s
+  k=40... 5.3785s
+  k=50... 5.9811s
+  Averaged: 4.7845s, corr=0.7973
+Chunk size 7000:
+  k=10... 3.3988s
+  k=20... 4.2381s
+  k=30... 4.7884s
+  k=40... 5.7062s
+  k=50... 5.9831s
+  Averaged: 4.8229s, corr=0.7880
+Chunk size 6500:
+  k=10... 3.3934s
+  k=20... 4.2149s
+  k=30... 5.0383s
+  k=40... 6.0162s
+  k=50... 6.4324s
+  Averaged: 5.0190s, corr=0.7807
+Chunk size 6000:
+  k=10... 3.3346s
+  k=20... 4.1931s
+  k=30... 4.7741s
+  k=40... 5.6178s
+  k=50... 6.3802s
+  Averaged: 4.8600s, corr=0.7742
+Chunk size 5500:
+  k=10... 3.5596s
+  k=20... 4.2983s
+  k=30... 5.1204s
+  k=40... 6.2141s
+  k=50... 6.8204s
+  Averaged: 5.2025s, corr=0.7657
+Chunk size 5000:
+  k=10... 3.4265s
+  k=20... 4.3525s
+  k=30... 4.9694s
+  k=40... 6.1547s
+  k=50... 6.9059s
+  Averaged: 5.1618s, corr=0.7546
+Chunk size 4500:
+  k=10... 3.6098s
+  k=20... 4.4865s
+  k=30... 5.2222s
+  k=40... 6.5741s
+  k=50... 7.3604s
+  Averaged: 5.4506s, corr=0.7465
+Chunk size 4000:
+  k=10... 3.6701s
+  k=20... 4.5769s
+  k=30... 5.5232s
+  k=40... 7.0747s
+  k=50... 8.1928s
+  Averaged: 5.8075s, corr=0.7370
+Chunk size 3500:
+  k=10... 3.9073s
+  k=20... 4.8508s
+  k=30... 6.5327s
+  k=40... 7.9078s
+  k=50... 8.9749s
+  Averaged: 6.4347s, corr=0.7244
+Chunk size 3000:
+  k=10... 3.9471s
+  k=20... 5.1649s
+  k=30... 7.4798s
+  k=40... 8.8762s
+  k=50... 10.0745s
+  Averaged: 7.1085s, corr=0.7102
+Chunk size 2500:
+  k=10... 4.5090s
+  k=20... 5.8780s
+  k=30... 7.4093s
+  k=40... 9.6748s
+  k=50... 11.4495s
+  Averaged: 7.7841s, corr=0.6947
+Chunk size 2000:
+  k=10... 4.8811s
+  k=20... 7.6600s
+  k=30... 9.7420s
+  k=40... 12.1463s
+  k=50... 13.8812s
+  Averaged: 9.6621s, corr=0.6741
+Chunk size 1500:
+  k=10... 5.7920s
+  k=20... 9.4199s
+  k=30... 11.9668s
+  k=40... 15.0684s
+  k=50... 17.6632s
+  Averaged: 11.9821s, corr=0.6496
+Chunk size 1000:
+  k=10... 6.7026s
+  k=20... 11.3472s
+  k=30... 15.8398s
+  k=40... 20.3222s
+  k=50... 24.1651s
+  Averaged: 15.6754s, corr=0.6190
+Chunk size 500:
+  k=10... 8.6323s
+  k=20... 15.3808s
+  k=30... 20.7757s
+  k=40... 26.1716s
+  k=50... 34.2537s
+  Averaged: 21.0428s, corr=0.5661
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.1/fastlof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1600: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  axes[0, 1].legend(loc='upper left', fontsize=8)
+Saved Experiment B plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.1/fastlof_summary.png
+Saved detail plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.1/fastlof_detail.png
+Saved FastLOF scatter plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.1/fastlof_scatter.png
+Saved FastLOF timing pies to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.1/fastlof_timing.png
+
+=== Experiment B Complete ===
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.2
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.1000
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 10000 to 500 (step=500)
+
+--- Running baseline LOF ---
+Skipping algorithms: ball_tree
+  k=10 (kd_tree)... 2.5530s (brute)... 30.4617s
+  k=20 (kd_tree)... 3.5739s (brute)... 30.7442s
+  k=30 (kd_tree)... 4.4946s (brute)... 30.9965s
+  k=40 (kd_tree)... 5.3782s (brute)... 33.7367s
+  k=50 (kd_tree)... 6.2256s (brute)... 31.4843s
+
+Baseline algorithms:
+  LOF kd_tree (averaged): 4.4451s
+  LOF brute (averaged): 31.4847s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [10000, 9500, 9000, 8500, 8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000, 3500, 3000, 2500, 2000, 1500, 1000, 500]
+
+--- Running FastLOF ---
+Chunk size 10000:
+  k=10... 3.5061s
+  k=20... 3.9037s
+  k=30... 4.4569s
+  k=40... 4.9152s
+  k=50... 5.3167s
+  Averaged: 4.4197s, corr=0.8114
+Chunk size 9500:
+  k=10... 3.3682s
+  k=20... 4.0862s
+  k=30... 4.4192s
+  k=40... 4.9365s
+  k=50... 5.3727s
+  Averaged: 4.4365s, corr=0.8076
+Chunk size 9000:
+  k=10... 3.3007s
+  k=20... 4.0983s
+  k=30... 4.3438s
+  k=40... 4.8787s
+  k=50... 5.4550s
+  Averaged: 4.4153s, corr=0.8010
+Chunk size 8500:
+  k=10... 3.1824s
+  k=20... 3.6716s
+  k=30... 4.2099s
+  k=40... 4.6881s
+  k=50... 5.2392s
+  Averaged: 4.1982s, corr=0.8001
+Chunk size 8000:
+  k=10... 3.7726s
+  k=20... 3.7727s
+  k=30... 4.3819s
+  k=40... 4.8586s
+  k=50... 5.3745s
+  Averaged: 4.4321s, corr=0.7936
+Chunk size 7500:
+  k=10... 2.9794s
+  k=20... 3.6985s
+  k=30... 4.2914s
+  k=40... 4.8105s
+  k=50... 5.3732s
+  Averaged: 4.2306s, corr=0.7890
+Chunk size 7000:
+  k=10... 2.9607s
+  k=20... 3.7294s
+  k=30... 4.4202s
+  k=40... 5.1646s
+  k=50... 5.6600s
+  Averaged: 4.3870s, corr=0.7835
+Chunk size 6500:
+  k=10... 3.0027s
+  k=20... 3.8404s
+  k=30... 4.5288s
+  k=40... 5.4283s
+  k=50... 5.8808s
+  Averaged: 4.5362s, corr=0.7759
+Chunk size 6000:
+  k=10... 2.9427s
+  k=20... 3.8926s
+  k=30... 4.6524s
+  k=40... 5.4037s
+  k=50... 6.1325s
+  Averaged: 4.6048s, corr=0.7704
+Chunk size 5500:
+  k=10... 3.1856s
+  k=20... 4.2648s
+  k=30... 4.7970s
+  k=40... 5.6979s
+  k=50... 6.3918s
+  Averaged: 4.8674s, corr=0.7644
+Chunk size 5000:
+  k=10... 3.0521s
+  k=20... 4.0916s
+  k=30... 5.0540s
+  k=40... 6.0306s
+  k=50... 6.7794s
+  Averaged: 5.0015s, corr=0.7564
+Chunk size 4500:
+  k=10... 3.0846s
+  k=20... 4.1739s
+  k=30... 5.1250s
+  k=40... 6.5311s
+  k=50... 7.3548s
+  Averaged: 5.2539s, corr=0.7490
+Chunk size 4000:
+  k=10... 3.1650s
+  k=20... 4.2555s
+  k=30... 5.3683s
+  k=40... 6.8259s
+  k=50... 7.7619s
+  Averaged: 5.4753s, corr=0.7400
+Chunk size 3500:
+  k=10... 3.1911s
+  k=20... 4.6604s
+  k=30... 5.4212s
+  k=40... 7.3517s
+  k=50... 8.3884s
+  Averaged: 5.8026s, corr=0.7320
+Chunk size 3000:
+  k=10... 3.2934s
+  k=20... 4.4599s
+  k=30... 5.5642s
+  k=40... 7.9767s
+  k=50... 9.3635s
+  Averaged: 6.1315s, corr=0.7221
+Chunk size 2500:
+  k=10... 3.2851s
+  k=20... 5.4095s
+  k=30... 6.9307s
+  k=40... 8.7028s
+  k=50... 10.2054s
+  Averaged: 6.9067s, corr=0.7086
+Chunk size 2000:
+  k=10... 3.4322s
+  k=20... 5.1845s
+  k=30... 7.7110s
+  k=40... 9.4104s
+  k=50... 10.6317s
+  Averaged: 7.2740s, corr=0.6935
+Chunk size 1500:
+  k=10... 3.5502s
+  k=20... 5.5335s
+  k=30... 7.6954s
+  k=40... 9.8950s
+  k=50... 12.4231s
+  Averaged: 7.8195s, corr=0.6749
+Chunk size 1000:
+  k=10... 3.8001s
+  k=20... 5.9754s
+  k=30... 8.3145s
+  k=40... 12.1985s
+  k=50... 13.7963s
+  Averaged: 8.8170s, corr=0.6497
+Chunk size 500:
+  k=10... 4.4731s
+  k=20... 6.8196s
+  k=30... 8.2353s
+  k=40... 13.1097s
+  k=50... 15.3594s
+  Averaged: 9.5994s, corr=0.6015
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.2/fastlof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1600: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  axes[0, 1].legend(loc='upper left', fontsize=8)
+Saved Experiment B plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.2/fastlof_summary.png
+Saved detail plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.2/fastlof_detail.png
+Saved FastLOF scatter plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.2/fastlof_scatter.png
+Saved FastLOF timing pies to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/fastlof_experiments/k10-50_t1.2/fastlof_timing.png
+
+=== Experiment B Complete ===
+
+================================================================================
+All Experiments Complete!
+================================================================================
+
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Fri Dec 12 06:42:15 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n058
+Job ID: 2571012
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 2-22:32:51
+CPU Efficiency: 14.88% of 19-18:11:40 core-walltime
+Job Wall-clock time: 23:42:35
+Memory Utilized: 1.25 GB
+Memory Efficiency: 2.61% of 48.00 GB (48.00 GB/node)
