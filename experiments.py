@@ -25,7 +25,7 @@ Key Features:
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 import time
 import math
 import os
@@ -506,6 +506,8 @@ def _aggregate_metrics(metrics_list):
     """
     Aggregate metrics across multiple runs or configurations.
     
+    Computes mean and standard deviation for each metric.
+    
     Parameters
     ----------
     metrics_list : list of dict
@@ -514,7 +516,8 @@ def _aggregate_metrics(metrics_list):
     Returns
     -------
     dict or None
-        Averaged metrics, or None if no valid metrics
+        Aggregated metrics with mean and std (e.g., 'roc_auc', 'roc_auc_std'),
+        or None if no valid metrics
     """
     if not metrics_list:
         return None
@@ -526,6 +529,11 @@ def _aggregate_metrics(metrics_list):
         vals = [m[key] for m in metrics_list if m and m.get(key) is not None]
         if vals:
             agg[key] = float(np.mean(vals))
+            # Compute std: 0.0 for single run, otherwise std
+            if len(vals) == 1:
+                agg[f'{key}_std'] = 0.0
+            else:
+                agg[f'{key}_std'] = float(np.std(vals))
     
     return agg if agg else None
 
@@ -921,7 +929,7 @@ def run_original_lof_experiment(X, y, k_min=10, k_max=50, step=10, n_runs=5, dat
     print("\n=== Experiment A: Original LOF Quality & Robustness ===")
     
     # Normalize features
-    scaler = StandardScaler()
+    scaler = MinMaxScaler()
     X_norm = scaler.fit_transform(X)
     
     # Determine contamination parameter
@@ -949,6 +957,7 @@ def run_original_lof_experiment(X, y, k_min=10, k_max=50, step=10, n_runs=5, dat
     # Prepare CSV results
     rows = []
     for res in baseline:
+        metrics = res['metrics'] or {}
         rows.append({
             'Algorithm': 'LOF',
             'k': res['k'],
@@ -958,10 +967,12 @@ def run_original_lof_experiment(X, y, k_min=10, k_max=50, step=10, n_runs=5, dat
             'Runtime_Std': res['time_stats']['std'],
             'Runtime_Min': res['time_stats']['min'],
             'Runtime_Max': res['time_stats']['max'],
-            'ROC_AUC': (res['metrics'] or {}).get('roc_auc'),
-            'Precision_at_k': (res['metrics'] or {}).get('precision_at_k'),
+            'ROC_AUC': metrics.get('roc_auc'),
+            'PR_AUC': metrics.get('pr_auc'),
+            'Precision_at_k': metrics.get('precision_at_k'),
         })
     
+    orig_metrics = original_result['metrics'] or {}
     rows.append({
         'Algorithm': 'OriginalLOF',
         'k': '',
@@ -971,8 +982,9 @@ def run_original_lof_experiment(X, y, k_min=10, k_max=50, step=10, n_runs=5, dat
         'Runtime_Std': original_result['time_stats']['std'],
         'Runtime_Min': original_result['time_stats']['min'],
         'Runtime_Max': original_result['time_stats']['max'],
-        'ROC_AUC': (original_result['metrics'] or {}).get('roc_auc'),
-        'Precision_at_k': (original_result['metrics'] or {}).get('precision_at_k'),
+        'ROC_AUC': orig_metrics.get('roc_auc'),
+        'PR_AUC': orig_metrics.get('pr_auc'),
+        'Precision_at_k': orig_metrics.get('precision_at_k'),
     })
     
     # Save results
@@ -1028,8 +1040,9 @@ def plot_original_lof_results(dataset_filepath, baseline,
     lof_aucs = np.array([r['metrics']['roc_auc'] if r['metrics'] else np.nan for r in baseline])
     lof_prec = np.array([r['metrics']['precision_at_k'] if r['metrics'] else np.nan for r in baseline])
 
-    orig_auc = original_result['metrics']['roc_auc'] if original_result['metrics'] else np.nan
-    orig_prec = original_result['metrics']['precision_at_k'] if original_result['metrics'] else np.nan
+    orig_metrics = original_result['metrics'] or {}
+    orig_auc = orig_metrics.get('roc_auc', np.nan)
+    orig_prec = orig_metrics.get('precision_at_k', np.nan)
     orig_scores = np.array(original_result['scores'])
 
     # ----------------------------------------------------------------------
@@ -1055,16 +1068,8 @@ def plot_original_lof_results(dataset_filepath, baseline,
     best_k = k_values[best_idx]
 
     # ----------------------------------------------------------------------
-    # Runtime aggregation
+    # Runtime data for comparison
     # ----------------------------------------------------------------------
-    def _agg_time(list_stats):
-        avg = np.mean([s['time_stats']['avg'] for s in list_stats])
-        min_v = np.min([s['time_stats']['min'] for s in list_stats])
-        max_v = np.max([s['time_stats']['max'] for s in list_stats])
-        return avg, avg - min_v, max_v - avg
-
-    lof_avg, lof_err_low, lof_err_up = _agg_time(baseline)
-
     orig_avg = original_result['time_stats']['avg']
     orig_err_low = orig_avg - original_result['time_stats']['min']
     orig_err_up = original_result['time_stats']['max'] - orig_avg
@@ -1088,15 +1093,27 @@ def plot_original_lof_results(dataset_filepath, baseline,
     # Panel 1: Runtime comparison
     # ----------------------------------------------------------------------
     ax = axes[0, 0]
-    labels = ["LOF (avg over k)", "Original LOF"]
-    values = [lof_avg, orig_avg]
-    yerr = [[lof_err_low, orig_err_low],
-            [lof_err_up, orig_err_up]]
+    
+    # Create labels and values for each k value
+    labels = [f"LOF (k={k})" for k in k_values]
+    labels.append("Original LOF")
+    
+    values = [r['time_stats']['avg'] for r in baseline]
+    values.append(orig_avg)
+    
+    err_low = [r['time_stats']['avg'] - r['time_stats']['min'] for r in baseline]
+    err_low.append(orig_err_low)
+    
+    err_up = [r['time_stats']['max'] - r['time_stats']['avg'] for r in baseline]
+    err_up.append(orig_err_up)
+    
+    yerr = [err_low, err_up]
 
     ax.bar(labels, values, yerr=yerr, alpha=0.75, capsize=6)
     ax.set_title("Runtime Comparison")
     ax.set_ylabel("Time (seconds)")
     ax.set_ylim(bottom=0)  # Ensure y-axis starts at 0 (time cannot be negative)
+    ax.tick_params(axis='x', rotation=45)  # Rotate labels if needed
     ax.grid(True, axis='y', alpha=0.3)
 
     # ----------------------------------------------------------------------
@@ -1255,7 +1272,7 @@ def run_fastlof_experiment(
     print("\n=== Experiment B: FastLOF Speed & Scalability ===")
     
     # Normalize features
-    scaler = StandardScaler()
+    scaler = MinMaxScaler()
     X_norm = scaler.fit_transform(X)
     
     # Determine contamination parameter
@@ -1418,6 +1435,7 @@ def run_fastlof_experiment(
                                       ('kd_tree', baseline_kd_tree),
                                       ('brute', baseline_brute)]:
         if base_res is not None:
+            base_metrics = base_res['metrics'] or {}
             rows.append({
                 'Algorithm': f"LOF_{algorithm_name}",
                 'k': '',
@@ -1427,12 +1445,17 @@ def run_fastlof_experiment(
                 'Runtime_Std': base_res['time_stats']['std'],
                 'Runtime_Min': base_res['time_stats']['min'],
                 'Runtime_Max': base_res['time_stats']['max'],
-                'ROC_AUC': (base_res['metrics'] or {}).get('roc_auc'),
-                'Precision_at_k': (base_res['metrics'] or {}).get('precision_at_k'),
+                'ROC_AUC': base_metrics.get('roc_auc'),
+                'ROC_AUC_Std': base_metrics.get('roc_auc_std'),
+                'PR_AUC': base_metrics.get('pr_auc'),
+                'PR_AUC_Std': base_metrics.get('pr_auc_std'),
+                'Precision_at_k': base_metrics.get('precision_at_k'),
+                'Precision_at_k_Std': base_metrics.get('precision_at_k_std'),
             })
     
     # FastLOF results
     for res in fast_results:
+        fast_metrics = res['metrics'] or {}
         rows.append({
             'Algorithm': 'FastLOF',
             'k': '',
@@ -1442,8 +1465,12 @@ def run_fastlof_experiment(
             'Runtime_Std': res['time_stats']['std'],
             'Runtime_Min': res['time_stats']['min'],
             'Runtime_Max': res['time_stats']['max'],
-            'ROC_AUC': (res['metrics'] or {}).get('roc_auc'),
-            'Precision_at_k': (res['metrics'] or {}).get('precision_at_k'),
+            'ROC_AUC': fast_metrics.get('roc_auc'),
+            'ROC_AUC_Std': fast_metrics.get('roc_auc_std'),
+            'PR_AUC': fast_metrics.get('pr_auc'),
+            'PR_AUC_Std': fast_metrics.get('pr_auc_std'),
+            'Precision_at_k': fast_metrics.get('precision_at_k'),
+            'Precision_at_k_Std': fast_metrics.get('precision_at_k_std'),
         })
     
     # Save results
@@ -1532,14 +1559,21 @@ def plot_fastlof_results(dataset_filepath, baseline_ball_tree, baseline_kd_tree,
     
     corr_vals = [r.get('correlation') for r in fast_results]
     auc_vals = [(r['metrics'] or {}).get('roc_auc') for r in fast_results]
+    auc_vals_std = [(r['metrics'] or {}).get('roc_auc_std', 0.0) for r in fast_results]
     prec_vals = [(r['metrics'] or {}).get('precision_at_k') for r in fast_results]
+    prec_vals_std = [(r['metrics'] or {}).get('precision_at_k_std', 0.0) for r in fast_results]
     pr_auc_vals = [(r['metrics'] or {}).get('pr_auc') for r in fast_results]
+    pr_auc_vals_std = [(r['metrics'] or {}).get('pr_auc_std', 0.0) for r in fast_results]
     runtimes = [r['time_stats']['avg'] for r in fast_results]
     
     # Use brute as baseline for quality metrics
-    baseline_auc = (baseline_reference['metrics'] or {}).get('roc_auc')
-    baseline_prec = (baseline_reference['metrics'] or {}).get('precision_at_k')
-    baseline_pr_auc = (baseline_reference['metrics'] or {}).get('pr_auc')
+    baseline_metrics = baseline_reference['metrics'] or {}
+    baseline_auc = baseline_metrics.get('roc_auc')
+    baseline_auc_std = baseline_metrics.get('roc_auc_std', 0.0)
+    baseline_prec = baseline_metrics.get('precision_at_k')
+    baseline_prec_std = baseline_metrics.get('precision_at_k_std', 0.0)
+    baseline_pr_auc = baseline_metrics.get('pr_auc')
+    baseline_pr_auc_std = baseline_metrics.get('pr_auc_std', 0.0)
     
     # ========== Main summary (4 plots) ==========
     fig, axes = plt.subplots(2, 2, figsize=(14, 10))
@@ -1659,10 +1693,30 @@ def plot_fastlof_results(dataset_filepath, baseline_ball_tree, baseline_kd_tree,
     axes[1, 0].legend(loc='upper left', fontsize=8)
     
     # 4. ROC AUC vs chunk size with baseline (adaptive y-axis)
-    axes[1, 1].plot(chunk_numeric, auc_vals, 'o-', color='purple', label='FastLOF AUC')
+    axes[1, 1].plot(chunk_numeric, auc_vals, 'o-', color='purple', label='FastLOF AUC', linewidth=2)
+    
+    # Add shaded band for FastLOF AUC
+    valid_indices = [i for i, v in enumerate(auc_vals) if v is not None]
+    if valid_indices:
+        valid_chunks = [chunk_numeric[i] for i in valid_indices]
+        valid_aucs = [auc_vals[i] for i in valid_indices]
+        valid_stds = [auc_vals_std[i] for i in valid_indices]
+        has_std = any(s > 1e-6 for s in valid_stds)  # Check if any std is meaningful
+        axes[1, 1].fill_between(
+            valid_chunks,
+            [a - s for a, s in zip(valid_aucs, valid_stds)],
+            [a + s for a, s in zip(valid_aucs, valid_stds)],
+            alpha=0.25, color='purple',
+            label='FastLOF ±1 std' if has_std else None
+        )
+    
     if baseline_auc is not None:
-        axes[1, 1].axhline(baseline_auc, color='green', linestyle='--', 
+        axes[1, 1].axhline(baseline_auc, color='green', linestyle='--', linewidth=2,
                           label=f'LOF brute AUC = {baseline_auc:.4f}')
+        # Add shaded band for baseline - only if std > 0
+        if baseline_auc_std > 1e-6:
+            axes[1, 1].axhspan(baseline_auc - baseline_auc_std, baseline_auc + baseline_auc_std,
+                              alpha=0.2, color='green', label='LOF brute ±1 std')
     axes[1, 1].set_xlabel('Chunk size')
     axes[1, 1].set_ylabel('ROC AUC')
     
@@ -1706,10 +1760,30 @@ def plot_fastlof_results(dataset_filepath, baseline_ball_tree, baseline_kd_tree,
                    fontsize=14, fontweight='bold')
     
     # 1. Precision@k vs chunk size
-    axes_d[0].plot(chunk_numeric, prec_vals, 'o-', color='orange', label='FastLOF P@k')
+    axes_d[0].plot(chunk_numeric, prec_vals, 'o-', color='orange', label='FastLOF P@k', linewidth=2)
+    
+    # Add shaded band for FastLOF Precision@k
+    valid_indices = [i for i, v in enumerate(prec_vals) if v is not None]
+    if valid_indices:
+        valid_chunks = [chunk_numeric[i] for i in valid_indices]
+        valid_precs = [prec_vals[i] for i in valid_indices]
+        valid_stds = [prec_vals_std[i] for i in valid_indices]
+        has_std = any(s > 1e-6 for s in valid_stds)  # Check if any std is meaningful
+        axes_d[0].fill_between(
+            valid_chunks,
+            [p - s for p, s in zip(valid_precs, valid_stds)],
+            [p + s for p, s in zip(valid_precs, valid_stds)],
+            alpha=0.25, color='orange',
+            label='FastLOF ±1 std' if has_std else None
+        )
+    
     if baseline_prec is not None:
-        axes_d[0].axhline(baseline_prec, color='green', linestyle='--', 
+        axes_d[0].axhline(baseline_prec, color='green', linestyle='--', linewidth=2,
                          label=f'LOF brute P@k = {baseline_prec:.4f}')
+        # Add shaded band for baseline - only if std > 0
+        if baseline_prec_std > 1e-6:
+            axes_d[0].axhspan(baseline_prec - baseline_prec_std, baseline_prec + baseline_prec_std,
+                             alpha=0.2, color='green', label='LOF brute ±1 std')
     axes_d[0].set_xlabel('Chunk size')
     axes_d[0].set_ylabel('Precision@k')
     axes_d[0].set_ylim(0.0, 1.05)
@@ -1720,11 +1794,31 @@ def plot_fastlof_results(dataset_filepath, baseline_ball_tree, baseline_kd_tree,
     # 2. Dual-axis runtime + AUC vs chunk size
     ax_rt = axes_d[1]
     ax_auc = ax_rt.twinx()
-    ax_rt.plot(chunk_numeric, runtimes, 'o-', color='red', label='Runtime (s)')
-    ax_auc.plot(chunk_numeric, auc_vals, 's--', color='purple', label='ROC AUC')
+    ax_rt.plot(chunk_numeric, runtimes, 'o-', color='red', label='Runtime (s)', linewidth=2)
+    ax_auc.plot(chunk_numeric, auc_vals, 's--', color='purple', label='ROC AUC', linewidth=2)
+    
+    # Add shaded band for AUC on the dual-axis plot
+    valid_indices = [i for i, v in enumerate(auc_vals) if v is not None]
+    if valid_indices:
+        valid_chunks = [chunk_numeric[i] for i in valid_indices]
+        valid_aucs = [auc_vals[i] for i in valid_indices]
+        valid_stds = [auc_vals_std[i] for i in valid_indices]
+        has_std = any(s > 1e-6 for s in valid_stds)  # Check if any std is meaningful
+        ax_auc.fill_between(
+            valid_chunks,
+            [a - s for a, s in zip(valid_aucs, valid_stds)],
+            [a + s for a, s in zip(valid_aucs, valid_stds)],
+            alpha=0.25, color='purple',
+            label='FastLOF AUC ±1 std' if has_std else None
+        )
+    
     if baseline_auc is not None:
         ax_auc.axhline(baseline_auc, color='green', linestyle=':', linewidth=1.5,
                       label=f'LOF brute AUC = {baseline_auc:.4f}')
+        # Add shaded band for baseline - only if std > 0
+        if baseline_auc_std > 1e-6:
+            ax_auc.axhspan(baseline_auc - baseline_auc_std, baseline_auc + baseline_auc_std,
+                          alpha=0.2, color='green', label='LOF brute ±1 std')
     ax_rt.set_xlabel('Chunk size')
     ax_rt.set_ylabel('Runtime (s)', color='red')
     ax_auc.set_ylabel('ROC AUC', color='purple')
@@ -1735,10 +1829,30 @@ def plot_fastlof_results(dataset_filepath, baseline_ball_tree, baseline_kd_tree,
     ax_rt.legend(lines, labels, loc='lower right', fontsize=8)
     
     # 3. PR-AUC vs chunk size
-    axes_d[2].plot(chunk_numeric, pr_auc_vals, 'o-', color='teal', label='FastLOF PR-AUC')
+    axes_d[2].plot(chunk_numeric, pr_auc_vals, 'o-', color='teal', label='FastLOF PR-AUC', linewidth=2)
+    
+    # Add shaded band for FastLOF PR-AUC
+    valid_indices = [i for i, v in enumerate(pr_auc_vals) if v is not None]
+    if valid_indices:
+        valid_chunks = [chunk_numeric[i] for i in valid_indices]
+        valid_pr_aucs = [pr_auc_vals[i] for i in valid_indices]
+        valid_stds = [pr_auc_vals_std[i] for i in valid_indices]
+        has_std = any(s > 1e-6 for s in valid_stds)  # Check if any std is meaningful
+        axes_d[2].fill_between(
+            valid_chunks,
+            [p - s for p, s in zip(valid_pr_aucs, valid_stds)],
+            [p + s for p, s in zip(valid_pr_aucs, valid_stds)],
+            alpha=0.25, color='teal',
+            label='FastLOF ±1 std' if has_std else None
+        )
+    
     if baseline_pr_auc is not None:
-        axes_d[2].axhline(baseline_pr_auc, color='green', linestyle='--', 
+        axes_d[2].axhline(baseline_pr_auc, color='green', linestyle='--', linewidth=2,
                          label=f'LOF brute PR-AUC = {baseline_pr_auc:.4f}')
+        # Add shaded band for baseline - only if std > 0
+        if baseline_pr_auc_std > 1e-6:
+            axes_d[2].axhspan(baseline_pr_auc - baseline_pr_auc_std, baseline_pr_auc + baseline_pr_auc_std,
+                             alpha=0.2, color='green', label='LOF brute ±1 std')
     axes_d[2].set_xlabel('Chunk size')
     axes_d[2].set_ylabel('PR-AUC')
     axes_d[2].set_ylim(0.0, 1.05)
