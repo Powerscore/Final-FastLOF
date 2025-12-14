@@ -1,0 +1,95 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2599135
+Job Name: fastlof_creditcard
+Node: uc3n002.localdomain
+Started at: Sun Dec 14 08:33:15 PM CET 2025
+CPUs allocated: 24
+Memory allocated: 64G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: creditcard - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - creditcard
+================================================================================
+
+Loading dataset: data/creditcard.csv (fraction=1)
+
+--- Dataset preview (first 5 rows) ---
+   Time        V1        V2        V3  ...       V27       V28  Amount  Class
+0     0 -1.359807 -0.072781  2.536347  ...  0.133558 -0.021053  149.62      0
+1     0  1.191857  0.266151  0.166480  ... -0.008983  0.014724    2.69      0
+2     1 -1.358354 -1.340163  1.773209  ... -0.055353 -0.059752  378.66      0
+3     1 -0.966272 -0.185226  1.792993  ...  0.062723  0.061458  123.50      0
+4     2 -1.158233  0.877737  1.548718  ...  0.219422  0.215153   69.99      0
+
+[5 rows x 31 columns]
+--------------------------------------
+Dataset shape: (284807, 30)
+Number of anomalies: 492 (0.17%)
+
+Testing thresholds: [1.01, 1.1, 1.2]
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.01
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0017
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 10000 to 500 (step=500)
+
+--- Running baseline LOF ---
+Skipping algorithms: ball_tree, kd_tree
+  k=10 (brute)... 55.2181s
+  k=20 (brute)... 58.3421s
+  k=30 (brute)... 61.6954s
+  k=40 (brute)... 68.5263s
+  k=50 (brute)... 67.3330s
+
+Baseline algorithms:
+  LOF brute (averaged): 62.2230s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [10000, 9500, 9000, 8500, 8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000, 3500, 3000, 2500, 2000, 1500, 1000, 500]
+
+--- Running FastLOF ---
+Chunk size 10000:
+  k=10... 43.8715s
+  k=20... 40.7127s
+  k=30... 38.3456s
+  k=40... 38.2928s
+  k=50... 39.0420s
+  Averaged: 40.0529s, corr=0.4048
+Chunk size 9500:
+  k=10... 43.6213s
+  k=20... 39.8772s
+  k=30... 38.5705s
+  k=40... 39.2076s
+  k=50... 38.5351s
+  Averaged: 39.9624s, corr=0.5600
+Chunk size 9000:
+  k=10... 43.2346s
+  k=20...

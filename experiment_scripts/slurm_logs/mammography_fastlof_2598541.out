@@ -1,0 +1,79 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2598541
+Job Name: fastlof_mammography
+Node: uc3n009.localdomain
+Started at: Sun Dec 14 05:18:14 PM CET 2025
+CPUs allocated: 24
+Memory allocated: 64G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: mammography - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - mammography
+================================================================================
+
+Loading dataset: data/mammography.mat
+
+--- Dataset preview (first 5 rows) [from .mat X] ---
+         f0        f1        f2        f3        f4        f5
+0  0.230020  5.072578 -0.276061  0.832444 -0.377866  0.480322
+1  0.155491 -0.169390  0.670652 -0.859553 -0.377866 -0.945723
+2 -0.784415 -0.443654  5.674705 -0.859553 -0.377866 -0.945723
+3  0.546088  0.131415 -0.456387 -0.859553 -0.377866 -0.945723
+4 -0.102987 -0.394994 -0.140816  0.979703 -0.377866  1.013566
+--------------------------------------
+Dataset shape: (11183, 6)
+Number of anomalies: 260 (2.32%)
+
+Testing thresholds: [0, 1.0, 1.01, 1.1, 1.2]
+
+--------------------------------------------------------------------------------
+Running with threshold = 0
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0232
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 3000 to 100 (step=100)
+
+--- Running baseline LOF ---
+  k=10 (ball_tree)... 121.3134s (kd_tree)... 55.8030s (brute)... 0.0833s
+  k=20 (ball_tree)... 0.6265s (kd_tree)... 239.5273s (brute)... 4.1278s
+  k=30 (ball_tree)... 117.4394s (kd_tree)... 72.4391s (brute)... 4.1384s
+  k=40 (ball_tree)... 110.5993s (kd_tree)... 56.7716s (brute)... 3.9558s
+  k=50 (ball_tree)... 68.8089s (kd_tree)... 47.2174s (brute)... 3.8763s
+
+Baseline algorithms:
+  LOF ball_tree (averaged): 83.7575s
+  LOF kd_tree (averaged): 94.3517s
+  LOF brute (averaged): 3.2363s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [3000, 2900, 2800, 2700, 2600, 2500, 2400, 2300, 2200, 2100, 2000, 1900, 1800, 1700, 1600, 1500, 1400, 1300, 1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
+
+--- Running FastLOF ---
+Chunk size 3000:
+  k=10...

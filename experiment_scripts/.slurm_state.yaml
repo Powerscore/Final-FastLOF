@@ -1,15 +1,27 @@
 completed_jobs:
-- creditcard
+- InternetAds_norm_02_v01
+- annthyroid-unsupervised-ad
+- dfki-artificial-3000-unsupervised-ad
+- breast-cancer-unsupervised-ad
+- pen-global-unsupervised-ad
+- pen-local-unsupervised-ad
+- shuttle-unsupervised-ad
+failed_jobs: []
+pending_datasets:
+- kdd99-unsupervised-ad
+- ForestCover
 - http
 - mulcross
-- ForestCover
-- kdd99-unsupervised-ad
-failed_jobs: []
-pending_datasets: []
 submitted_jobs:
-  ForestCover: '2595287'
-  creditcard: '2571011'
-  http: '2595836'
-  kdd99-unsupervised-ad: '2571013'
-  mulcross: '2571012'
-timestamp: '2025-12-13T02:18:25.389739'
+  InternetAds_norm_02_v01: '2598535'
+  PenDigits_withoutdupl_norm_v01: '2598530'
+  annthyroid-unsupervised-ad: '2598518'
+  breast-cancer-unsupervised-ad: '2598519'
+  creditcard: '2599135'
+  dfki-artificial-3000-unsupervised-ad: '2598520'
+  mammography: '2598541'
+  pen-global-unsupervised-ad: '2598529'
+  pen-local-unsupervised-ad: '2598521'
+  satellite-unsupervised-ad: '2598551'
+  shuttle-unsupervised-ad: '2598988'
+timestamp: '2025-12-14T20:32:45.202206'
