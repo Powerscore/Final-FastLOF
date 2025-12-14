@@ -2,7 +2,7 @@
 #SBATCH --job-name=fastlof_http
 #SBATCH --output=slurm_logs/http_fastlof_%j.out
 #SBATCH --error=slurm_logs/http_fastlof_%j.err
-#SBATCH --time=36:00:00
+#SBATCH --time=71:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=20
 #SBATCH --mem=48G

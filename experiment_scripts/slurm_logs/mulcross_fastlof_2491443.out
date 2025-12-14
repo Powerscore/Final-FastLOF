@@ -120,4 +120,75 @@ Chunk size 1000:
 Chunk size 900:
   k=10... 506.0354s
   k=20... 876.5059s
-  k=30...
+  k=30... 1612.8520s
+  k=40... 2716.6585s
+  k=50... 967.6302s
+  Averaged: 1335.9364s, corr=1.0000
+Chunk size 800:
+  k=10... 805.5350s
+  k=20... 619.1411s
+  k=30... 209.1119s
+  k=40... 345.8677s
+  k=50... 550.1406s
+  Averaged: 505.9593s, corr=1.0000
+Chunk size 700:
+  k=10... 5541.2382s
+  k=20... 485.8368s
+  k=30... 56.4028s
+  k=40... 60.8545s
+  k=50... 66.8417s
+  Averaged: 1242.2348s, corr=1.0000
+Chunk size 600:
+  k=10... 48.7544s
+  k=20... 59.3328s
+  k=30... 66.4157s
+  k=40... 70.7992s
+  k=50... 77.3786s
+  Averaged: 64.5361s, corr=1.0000
+Chunk size 500:
+  k=10... 56.9375s
+  k=20... 66.1419s
+  k=30... 74.7689s
+  k=40... 82.5399s
+  k=50... 89.5099s
+  Averaged: 73.9796s, corr=1.0000
+Chunk size 400:
+  k=10... 64.5166s
+  k=20... 78.1169s
+  k=30... 88.3707s
+  k=40... 98.8093s
+  k=50... 107.2472s
+  Averaged: 87.4121s, corr=1.0000
+Chunk size 300:
+  k=10... 87.7940s
+  k=20... 108.5576s
+  k=30... 121.7283s
+  k=40... 168.5356s
+  k=50... 148.7838s
+  Averaged: 127.0799s, corr=1.0000
+Chunk size 200:
+  k=10... 123.4878s
+  k=20... 288.2070s
+  k=30... 175.9766s
+  k=40... 198.5066s
+  k=50... 212.6844s
+  Averaged: 199.7725s, corr=1.0000
+Chunk size 100:
+  k=10... 309.9331s
+  k=20... 357.5804s
+  k=30... 414.7266s
+  k=40...
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n008
+Job ID: 2491443
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: TIMEOUT (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 59-04:02:20 core-walltime
+Job Wall-clock time: 2-23:00:07
+Memory Utilized: 585.94 MB
+Memory Efficiency: 1.19% of 48.00 GB (48.00 GB/node)

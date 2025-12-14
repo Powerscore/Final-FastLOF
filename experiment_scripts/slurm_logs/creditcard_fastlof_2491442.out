@@ -63,3 +63,17 @@ Chunk sizes: 10000 to 500 (step=500)
 --- Running baseline LOF ---
   k=10 (ball_tree)... 26923.2608s (kd_tree)... 12583.8937s (brute)... 68.6641s
   k=20 (ball_tree)...
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n049
+Job ID: 2491442
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: CANCELLED (exit code 0)
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 23-14:02:48 core-walltime
+Job Wall-clock time: 23:35:07
+Memory Utilized: 369.00 MB
+Memory Efficiency: 0.56% of 64.00 GB (64.00 GB/node)

@@ -64,3 +64,17 @@ Chunk sizes: 10000 to 500 (step=500)
   k=10 (ball_tree)... 8478.6828s (kd_tree)... 1367.9967s (brute)... 242.8006s
   k=20 (ball_tree)... 16654.9679s (kd_tree)... 1976.2584s (brute)... 244.0947s
   k=30 (ball_tree)... 53925.6099s (kd_tree)...
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n066
+Job ID: 2478953
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: CANCELLED (exit code 0)
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 35-16:15:36 core-walltime
+Job Wall-clock time: 1-11:40:39
+Memory Utilized: 688.39 MB
+Memory Efficiency: 1.05% of 64.00 GB (64.00 GB/node)
