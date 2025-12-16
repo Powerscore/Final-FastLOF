@@ -1,0 +1,254 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2611080
+Job Name: fastlof_kdd99-unsupervised-ad
+Node: uc3n008.localdomain
+Started at: Mon Dec 15 10:49:26 PM CET 2025
+CPUs allocated: 24
+Memory allocated: 64G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: kdd99-unsupervised-ad - FastLOF
+========================================================================
+
+
+================================================================================
+FastLOF Experiment - kdd99-unsupervised-ad
+================================================================================
+
+Loading dataset: data/kdd99-unsupervised-ad.csv (fraction=1)
+
+--- Dataset preview (first 5 rows) ---
+   0.0  215.0  45076.0  0.0.1  1.0  ...  0.0.19  0.0.20  0.0.21  0.0.22  n
+0  0.0  162.0   4528.0    0.0  1.0  ...     0.0     0.0     0.0     0.0  n
+1  0.0  236.0   1228.0    0.0  1.0  ...     0.0     0.0     0.0     0.0  n
+2  0.0  233.0   2032.0    0.0  1.0  ...     0.0     0.0     0.0     0.0  n
+3  0.0  239.0    486.0    0.0  1.0  ...     0.0     0.0     0.0     0.0  n
+4  0.0  238.0   1282.0    0.0  1.0  ...     0.0     0.0     0.0     0.0  n
+
+[5 rows x 30 columns]
+--------------------------------------
+Dataset shape: (620098, 29)
+Number of anomalies: 1052 (0.17%)
+
+Testing thresholds: [1.1]
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.1
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0017
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 10000 to 500 (step=500)
+
+--- Running baseline LOF ---
+Skipping algorithms: ball_tree, kd_tree
+  k=10 (brute)... 390.6815s
+  k=20 (brute)... 346.8065s
+  k=30 (brute)... 249.5092s
+  k=40 (brute)... 250.3791s
+  k=50 (brute)... 251.2023s
+
+Baseline algorithms:
+  LOF brute (averaged): 297.7157s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [10000, 9500, 9000, 8500, 8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000, 3500, 3000, 2500, 2000, 1500, 1000, 500]
+
+--- Running FastLOF ---
+Chunk size 10000:
+  k=10... 53.2076s
+  k=20... 53.6471s
+  k=30... 52.9162s
+  k=40... 55.1915s
+  k=50... 57.2564s
+  Averaged: 54.4437s, corr=0.6845
+Chunk size 9500:
+  k=10... 51.1748s
+  k=20... 50.3305s
+  k=30... 51.9724s
+  k=40... 54.6155s
+  k=50... 57.9327s
+  Averaged: 53.2052s, corr=0.8458
+Chunk size 9000:
+  k=10... 51.4779s
+  k=20... 50.4602s
+  k=30... 52.6694s
+  k=40... 53.2685s
+  k=50... 57.7194s
+  Averaged: 53.1191s, corr=0.6740
+Chunk size 8500:
+  k=10... 50.8504s
+  k=20... 49.3374s
+  k=30... 53.3874s
+  k=40... 53.5207s
+  k=50... 56.5599s
+  Averaged: 52.7311s, corr=0.7089
+Chunk size 8000:
+  k=10... 51.1908s
+  k=20... 50.3325s
+  k=30... 50.8247s
+  k=40... 53.4226s
+  k=50... 57.0059s
+  Averaged: 52.5553s, corr=0.0193
+Chunk size 7500:
+  k=10... 50.0783s
+  k=20... 49.8376s
+  k=30... 52.9888s
+  k=40... 53.4348s
+  k=50... 58.9386s
+  Averaged: 53.0556s, corr=0.9185
+Chunk size 7000:
+  k=10... 49.6139s
+  k=20... 48.2897s
+  k=30... 50.1374s
+  k=40... 54.3762s
+  k=50... 57.0761s
+  Averaged: 51.8987s, corr=0.8175
+Chunk size 6500:
+  k=10... 49.7842s
+  k=20... 49.9131s
+  k=30... 51.0815s
+  k=40... 55.4545s
+  k=50... 58.6409s
+  Averaged: 52.9749s, corr=0.9009
+Chunk size 6000:
+  k=10... 49.6802s
+  k=20... 48.6788s
+  k=30... 50.7912s
+  k=40... 57.4100s
+  k=50... 59.0554s
+  Averaged: 53.1231s, corr=0.8269
+Chunk size 5500:
+  k=10... 49.6290s
+  k=20... 50.7348s
+  k=30... 54.3099s
+  k=40... 57.9251s
+  k=50... 62.0375s
+  Averaged: 54.9272s, corr=0.7816
+Chunk size 5000:
+  k=10... 52.3028s
+  k=20... 51.7314s
+  k=30... 56.0755s
+  k=40... 62.8616s
+  k=50... 64.0789s
+  Averaged: 57.4100s, corr=0.8237
+Chunk size 4500:
+  k=10... 52.3716s
+  k=20... 51.8158s
+  k=30... 57.9259s
+  k=40... 62.2372s
+  k=50... 68.9157s
+  Averaged: 58.6533s, corr=0.7781
+Chunk size 4000:
+  k=10... 56.2824s
+  k=20... 56.9253s
+  k=30... 62.4055s
+  k=40... 66.6566s
+  k=50... 70.5261s
+  Averaged: 62.5592s, corr=0.0217
+Chunk size 3500:
+  k=10... 55.9857s
+  k=20... 56.5789s
+  k=30... 65.6014s
+  k=40... 75.4112s
+  k=50... 78.6313s
+  Averaged: 66.4417s, corr=0.0557
+Chunk size 3000:
+  k=10... 64.5355s
+  k=20... 63.8530s
+  k=30... 69.4817s
+  k=40... 77.6087s
+  k=50... 85.6069s
+  Averaged: 72.2171s, corr=0.7417
+Chunk size 2500:
+  k=10... 69.1360s
+  k=20... 72.9170s
+  k=30... 84.3075s
+  k=40... 90.3317s
+  k=50... 97.7979s
+  Averaged: 82.8980s, corr=0.0220
+Chunk size 2000:
+  k=10... 80.3372s
+  k=20... 85.3899s
+  k=30... 97.4886s
+  k=40... 106.7713s
+  k=50... 117.3068s
+  Averaged: 97.4588s, corr=0.8101
+Chunk size 1500:
+  k=10... 98.3275s
+  k=20... 109.8397s
+  k=30... 122.7022s
+  k=40... 139.4892s
+  k=50... 158.8577s
+  Averaged: 125.8432s, corr=0.0638
+Chunk size 1000:
+  k=10... 143.1343s
+  k=20... 156.6939s
+  k=30... 175.8760s
+  k=40... 197.5959s
+  k=50... 218.4628s
+  Averaged: 178.3526s, corr=0.8465
+Chunk size 500:
+  k=10... 284.3341s
+  k=20... 1048.2880s
+  k=30... 350.4138s
+  k=40... 387.4675s
+  k=50... 425.5208s
+  Averaged: 499.2049s, corr=0.6036
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/kdd99-unsupervised-ad/fastlof_experiments/k10-50_t1.1/fastlof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1634: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  axes[0, 1].legend(loc='upper left', fontsize=8)
+Saved Experiment B plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/kdd99-unsupervised-ad/fastlof_experiments/k10-50_t1.1/fastlof_summary.png
+Saved detail plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/kdd99-unsupervised-ad/fastlof_experiments/k10-50_t1.1/fastlof_detail.png
+Saved FastLOF scatter plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/kdd99-unsupervised-ad/fastlof_experiments/k10-50_t1.1/fastlof_scatter.png
+Saved FastLOF timing pies to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/kdd99-unsupervised-ad/fastlof_experiments/k10-50_t1.1/fastlof_timing.png
+
+=== Experiment B Complete ===
+
+================================================================================
+All Experiments Complete!
+================================================================================
+
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Tue Dec 16 01:40:56 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n008
+Job ID: 2611080
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 7-20:15:42
+CPU Efficiency: 52.78% of 14-20:42:24 core-walltime
+Job Wall-clock time: 14:51:46
+Memory Utilized: 1.56 GB
+Memory Efficiency: 2.44% of 64.00 GB (64.00 GB/node)
