@@ -3,8 +3,8 @@ Job Information
 ========================================================================
 Job ID: 2599135
 Job Name: fastlof_creditcard
-Node: uc3n002.localdomain
-Started at: Sun Dec 14 08:33:15 PM CET 2025
+Node: uc3n006.localdomain
+Started at: Mon Dec 15 04:26:20 PM CET 2025
 CPUs allocated: 24
 Memory allocated: 64G
 Partition: cpu
@@ -62,14 +62,14 @@ Chunk sizes: 10000 to 500 (step=500)
 
 --- Running baseline LOF ---
 Skipping algorithms: ball_tree, kd_tree
-  k=10 (brute)... 55.2181s
-  k=20 (brute)... 58.3421s
-  k=30 (brute)... 61.6954s
-  k=40 (brute)... 68.5263s
-  k=50 (brute)... 67.3330s
+  k=10 (brute)... 84.7461s
+  k=20 (brute)... 102.6394s
+  k=30 (brute)... 101.1391s
+  k=40 (brute)... 179.1832s
+  k=50 (brute)... 225.6490s
 
 Baseline algorithms:
-  LOF brute (averaged): 62.2230s
+  LOF brute (averaged): 138.6714s
 
 Using LOF brute as reference for FastLOF comparisons
 
@@ -77,19 +77,243 @@ Testing chunk sizes: [10000, 9500, 9000, 8500, 8000, 7500, 7000, 6500, 6000, 550
 
 --- Running FastLOF ---
 Chunk size 10000:
-  k=10... 43.8715s
-  k=20... 40.7127s
-  k=30... 38.3456s
-  k=40... 38.2928s
-  k=50... 39.0420s
-  Averaged: 40.0529s, corr=0.4048
+  k=10... 6719.8242s
+  k=20... 39.5479s
+  k=30... 38.0350s
+  k=40... 38.2764s
+  k=50... 38.2214s
+  Averaged: 1374.7810s, corr=0.6497
 Chunk size 9500:
-  k=10... 43.6213s
-  k=20... 39.8772s
-  k=30... 38.5705s
-  k=40... 39.2076s
-  k=50... 38.5351s
-  Averaged: 39.9624s, corr=0.5600
+  k=10... 43.1870s
+  k=20... 40.2108s
+  k=30... 38.3161s
+  k=40... 37.6750s
+  k=50... 37.5614s
+  Averaged: 39.3901s, corr=0.9116
 Chunk size 9000:
-  k=10... 43.2346s
-  k=20...
+  k=10... 43.0248s
+  k=20... 38.9937s
+  k=30... 37.5278s
+  k=40... 37.1499s
+  k=50... 37.2332s
+  Averaged: 38.7859s, corr=0.6650
+Chunk size 8500:
+  k=10... 42.6046s
+  k=20... 39.2255s
+  k=30... 38.0223s
+  k=40... 37.1061s
+  k=50... 37.0228s
+  Averaged: 38.7963s, corr=0.7022
+Chunk size 8000:
+  k=10... 44.5092s
+  k=20... 40.5572s
+  k=30... 38.4422s
+  k=40... 38.2798s
+  k=50... 38.2867s
+  Averaged: 40.0150s, corr=0.5708
+Chunk size 7500:
+  k=10... 44.0704s
+  k=20... 39.9260s
+  k=30... 38.0914s
+  k=40... 37.2335s
+  k=50... 37.4416s
+  Averaged: 39.3526s, corr=0.9482
+Chunk size 7000:
+  k=10... 43.1508s
+  k=20... 39.2706s
+  k=30... 37.2771s
+  k=40... 37.2593s
+  k=50... 36.9385s
+  Averaged: 38.7793s, corr=0.4684
+Chunk size 6500:
+  k=10... 43.8489s
+  k=20... 39.8294s
+  k=30... 38.0100s
+  k=40... 37.2208s
+  k=50... 37.6187s
+  Averaged: 39.3056s, corr=0.4917
+Chunk size 6000:
+  k=10... 44.1609s
+  k=20... 40.2228s
+  k=30... 37.0494s
+  k=40... 36.8715s
+  k=50... 36.6536s
+  Averaged: 38.9917s, corr=0.5227
+Chunk size 5500:
+  k=10... 44.3476s
+  k=20... 40.3445s
+  k=30... 37.7868s
+  k=40... 36.6659s
+  k=50... 37.0279s
+  Averaged: 39.2345s, corr=0.5399
+Chunk size 5000:
+  k=10... 44.9741s
+  k=20... 40.6828s
+  k=30... 37.2601s
+  k=40... 36.0780s
+  k=50... 36.9451s
+  Averaged: 39.1880s, corr=0.1381
+Chunk size 4500:
+  k=10... 45.9182s
+  k=20... 41.9084s
+  k=30... 37.6859s
+  k=40... 36.8516s
+  k=50... 36.9231s
+  Averaged: 39.8574s, corr=0.4570
+Chunk size 4000:
+  k=10... 46.0332s
+  k=20... 41.7307s
+  k=30... 36.9783s
+  k=40... 35.6467s
+  k=50... 36.2292s
+  Averaged: 39.3236s, corr=0.8238
+Chunk size 3500:
+  k=10... 45.4793s
+  k=20... 41.5475s
+  k=30... 36.6266s
+  k=40... 35.9333s
+  k=50... 36.0814s
+  Averaged: 39.1336s, corr=0.5260
+Chunk size 3000:
+  k=10... 47.1764s
+  k=20... 42.1481s
+  k=30... 37.5422s
+  k=40... 35.7257s
+  k=50... 36.5749s
+  Averaged: 39.8335s, corr=0.6064
+Chunk size 2500:
+  k=10... 48.1014s
+  k=20... 43.4657s
+  k=30... 37.6563s
+  k=40... 36.0020s
+  k=50... 38.5015s
+  Averaged: 40.7454s, corr=0.0405
+Chunk size 2000:
+  k=10... 49.6062s
+  k=20... 46.0152s
+  k=30... 41.6289s
+  k=40... 39.0194s
+  k=50... 39.3025s
+  Averaged: 43.1144s, corr=0.0476
+Chunk size 1500:
+  k=10... 55.1754s
+  k=20... 51.7641s
+  k=30... 46.8350s
+  k=40... 42.0453s
+  k=50... 44.4048s
+  Averaged: 48.0449s, corr=0.4377
+Chunk size 1000:
+  k=10... 63.9204s
+  k=20... 64.2436s
+  k=30... 57.2799s
+  k=40... 51.4561s
+  k=50... 55.7561s
+  Averaged: 58.5312s, corr=0.5562
+Chunk size 500:
+  k=10... 96.9310s
+  k=20... 103.4929s
+  k=30... 93.7632s
+  k=40... 91.9501s
+  k=50... 98.4812s
+  Averaged: 96.9237s, corr=0.0030
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/creditcard/fastlof_experiments/k10-50_t1.01/fastlof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1634: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  axes[0, 1].legend(loc='upper left', fontsize=8)
+Saved Experiment B plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/creditcard/fastlof_experiments/k10-50_t1.01/fastlof_summary.png
+Saved detail plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/creditcard/fastlof_experiments/k10-50_t1.01/fastlof_detail.png
+Saved FastLOF scatter plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/creditcard/fastlof_experiments/k10-50_t1.01/fastlof_scatter.png
+Saved FastLOF timing pies to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/creditcard/fastlof_experiments/k10-50_t1.01/fastlof_timing.png
+
+=== Experiment B Complete ===
+
+--------------------------------------------------------------------------------
+Running with threshold = 1.1
+--------------------------------------------------------------------------------
+
+
+=== Experiment B: FastLOF Speed & Scalability ===
+Using contamination parameter: 0.0017
+Testing k values: [10, 20, 30, 40, 50]
+Chunk sizes: 10000 to 500 (step=500)
+
+--- Running baseline LOF ---
+Skipping algorithms: ball_tree, kd_tree
+  k=10 (brute)... 55.6763s
+  k=20 (brute)... 57.9981s
+  k=30 (brute)... 61.6688s
+  k=40 (brute)... 64.4058s
+  k=50 (brute)... 66.2628s
+
+Baseline algorithms:
+  LOF brute (averaged): 61.2024s
+
+Using LOF brute as reference for FastLOF comparisons
+
+Testing chunk sizes: [10000, 9500, 9000, 8500, 8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000, 3500, 3000, 2500, 2000, 1500, 1000, 500]
+
+--- Running FastLOF ---
+Chunk size 10000:
+  k=10... 18.2361s
+  k=20... 17.8742s
+  k=30... 18.7452s
+  k=40... 18.2424s
+  k=50... 18.9634s
+  Averaged: 18.4123s, corr=0.0005
+Chunk size 9500:
+  k=10... 18.0554s
+  k=20... 17.7767s
+  k=30... 17.9005s
+  k=40... 18.2900s
+  k=50... 18.7615s
+  Averaged: 18.1568s, corr=0.0006
+Chunk size 9000:
+  k=10... 17.9967s
+  k=20... 17.8054s
+  k=30... 17.6914s
+  k=40... 18.2735s
+  k=50... 18.4036s
+  Averaged: 18.0341s, corr=0.0008
+Chunk size 8500:
+  k=10... 17.3797s
+  k=20... 17.2055s
+  k=30... 17.4917s
+  k=40... 17.3419s
+  k=50... 18.4419s
+  Averaged: 17.5721s, corr=0.0007
+Chunk size 8000:
+  k=10... 17.1700s
+  k=20... 17.0301s
+  k=30... 16.9710s
+  k=40... 17.5766s
+  k=50... 18.3371s
+  Averaged: 17.4169s, corr=0.0014
+Chunk size 7500:
+  k=10... 16.3623s
+  k=20... 16.2867s
+  k=30... 16.5629s
+  k=40... 17.2496s
+  k=50... 17.6001s
+  Averaged: 16.8123s, corr=0.0010
+Chunk size 7000:
+  k=10... 16.2745s
+  k=20... 16.1419s
+  k=30... 17.2216s
+  k=40... 17.1279s
+  k=50... 17.9502s
+  Averaged: 16.9432s, corr=0.0011
+Chunk size 6500:
+  k=10... 16.0453s
+  k=20... 15.6393s
+  k=30... 15.9791s
+  k=40... 16.6840s
+  k=50... 17.2836s
+  Averaged: 16.3262s, corr=0.0017
+Chunk size 6000:
+  k=10... 15.2386s
+  k=20... 15.5667s
+  k=30... 15.6904s
+  k=40... 16.4287s
+  k=50... 2380.9716s
+  Averaged: 488.7792s, corr=0.0009
+Chunk size 5500:
+  k=10...
