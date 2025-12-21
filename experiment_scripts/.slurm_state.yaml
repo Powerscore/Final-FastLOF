@@ -5,6 +5,8 @@ completed_jobs:
 - InternetAds_norm_02_v01
 - annthyroid-unsupervised-ad
 - mammography
+- creditcard
+- http
 - dfki-artificial-3000-unsupervised-ad
 - breast-cancer-unsupervised-ad
 - pen-global-unsupervised-ad
@@ -30,4 +32,4 @@ submitted_jobs:
   pen-local-unsupervised-ad: '2598521'
   satellite-unsupervised-ad: '2598551'
   shuttle-unsupervised-ad: '2598988'
-timestamp: '2025-12-16T13:43:38.458039'
+timestamp: '2025-12-18T15:29:47.687128'

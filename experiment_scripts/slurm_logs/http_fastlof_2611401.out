@@ -199,4 +199,55 @@ Chunk size 1500:
   k=20... 45.7335s
   k=30... 54.4041s
   k=40... 66.7990s
-  k=50...
+  k=50... 5146.6733s
+  Averaged: 2129.4305s, corr=0.9579
+Chunk size 1000:
+  k=10... 2002.2394s
+  k=20... 66.3767s
+  k=30... 84.5335s
+  k=40... 91.9324s
+  k=50... 100.4025s
+  Averaged: 469.0969s, corr=0.9711
+Chunk size 500:
+  k=10... 133.0422s
+  k=20... 130.9672s
+  k=30... 141.3463s
+  k=40... 146.2842s
+  k=50... 164.7354s
+  Averaged: 143.2751s, corr=0.9347
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/fastlof_experiments/k10-50_t1.1/fastlof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1634: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  axes[0, 1].legend(loc='upper left', fontsize=8)
+Saved Experiment B plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/fastlof_experiments/k10-50_t1.1/fastlof_summary.png
+Saved detail plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/fastlof_experiments/k10-50_t1.1/fastlof_detail.png
+Saved FastLOF scatter plots to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/fastlof_experiments/k10-50_t1.1/fastlof_scatter.png
+Saved FastLOF timing pies to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/fastlof_experiments/k10-50_t1.1/fastlof_timing.png
+
+=== Experiment B Complete ===
+
+================================================================================
+All Experiments Complete!
+================================================================================
+
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Wed Dec 17 02:02:06 AM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n062
+Job ID: 2611401
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 2-18:33:34
+CPU Efficiency: 12.27% of 22-14:17:40 core-walltime
+Job Wall-clock time: 1-03:06:53
+Memory Utilized: 1.30 GB
+Memory Efficiency: 2.72% of 48.00 GB (48.00 GB/node)
