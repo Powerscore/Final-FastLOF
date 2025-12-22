@@ -23,7 +23,7 @@ DATASET_NAME = "kdd99-unsupervised-ad"
 
 # Experiment parameters
 K_VALUES = [10, 20, 30, 40, 50]
-THRESHOLDS = [1.1]  # List of thresholds to test
+THRESHOLDS = [1.2]  # List of thresholds to test
 MIN_CHUNK_SIZE = 500
 MAX_CHUNK_SIZE = 10000
 CHUNK_INTERVAL = 500

@@ -22,7 +22,7 @@ DATASET_NAME = "mammography"
 
 # Experiment parameters
 K_VALUES = [10, 20, 30, 40, 50]
-THRESHOLDS = [0, 1.0, 1.01, 1.1, 1.2]  # List of thresholds to test
+THRESHOLDS = [0, 1.0, 1.01, 1.1, 1.2 ]  # List of thresholds to test
 MIN_CHUNK_SIZE = 100
 MAX_CHUNK_SIZE = 3000
 CHUNK_INTERVAL = 100
