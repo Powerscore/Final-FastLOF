@@ -52,4 +52,42 @@ Testing k values: [10, 20, 30, 40, 50]
 
 Running baseline LOF...
   k=10... done (avg: 88.8280s)
-  k=20...
+  k=20... done (avg: 416.0896s)
+  k=30... done (avg: 8.1189s)
+  k=40... done (avg: 9.2542s)
+  k=50... done (avg: 10.2239s)
+
+Running Original LOF (k_range=10-50)...
+  done (avg: 20.5036s)
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/lof_experiments/k10-50/original_lof_results.csv
+Saved: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/lof_experiments/k10-50/original_lof_summary.png
+Saved: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/lof_experiments/k10-50/original_lof_scatter.png
+
+=== Experiment A Complete ===
+
+================================================================================
+Experiment Complete!
+================================================================================
+
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Sun Dec 28 04:41:08 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n005
+Job ID: 2698521
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 00:20:46
+CPU Efficiency: 1.02% of 1-09:46:20 core-walltime
+Job Wall-clock time: 01:41:19
+Memory Utilized: 1.11 GB
+Memory Efficiency: 2.30% of 48.00 GB (48.00 GB/node)
