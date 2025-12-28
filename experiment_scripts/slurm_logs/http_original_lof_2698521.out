@@ -1,0 +1,55 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2698521
+Job Name: original_lof_http
+Node: uc3n005.localdomain
+Started at: Sun Dec 28 03:00:05 PM CET 2025
+CPUs allocated: 20
+Memory allocated: 48G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: http - Original LOF
+========================================================================
+
+
+================================================================================
+Original LOF Experiment - http
+================================================================================
+
+Loading dataset: data/http.mat
+
+--- Dataset preview (first 5 rows) [from .mat X using h5py] ---
+         f0        f1         f2
+0 -2.302585  5.371103  10.716107
+1 -2.302585  5.088213   8.418058
+2 -2.302585  5.464255   7.113224
+3 -2.302585  5.451468   7.616825
+4 -2.302585  5.476882   6.186414
+--------------------------------------
+Dataset shape: (567498, 3)
+Number of anomalies: 2211 (0.39%)
+
+=== Experiment A: Original LOF Quality & Robustness ===
+Using contamination parameter: 0.0039
+Testing k values: [10, 20, 30, 40, 50]
+
+Running baseline LOF...
+  k=10... done (avg: 88.8280s)
+  k=20...

@@ -1,0 +1,95 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2698522
+Job Name: original_lof_creditcard
+Node: uc3n023.localdomain
+Started at: Sun Dec 28 03:00:04 PM CET 2025
+CPUs allocated: 24
+Memory allocated: 64G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: creditcard - Original LOF
+========================================================================
+
+
+================================================================================
+Original LOF Experiment - creditcard
+================================================================================
+
+Loading dataset: data/creditcard.csv (fraction=1)
+
+--- Dataset preview (first 5 rows) ---
+   Time        V1        V2        V3  ...       V27       V28  Amount  Class
+0     0 -1.359807 -0.072781  2.536347  ...  0.133558 -0.021053  149.62      0
+1     0  1.191857  0.266151  0.166480  ... -0.008983  0.014724    2.69      0
+2     1 -1.358354 -1.340163  1.773209  ... -0.055353 -0.059752  378.66      0
+3     1 -0.966272 -0.185226  1.792993  ...  0.062723  0.061458  123.50      0
+4     2 -1.158233  0.877737  1.548718  ...  0.219422  0.215153   69.99      0
+
+[5 rows x 31 columns]
+--------------------------------------
+Dataset shape: (284807, 30)
+Number of anomalies: 492 (0.17%)
+
+=== Experiment A: Original LOF Quality & Robustness ===
+Using contamination parameter: 0.0017
+Testing k values: [10, 20, 30, 40, 50]
+
+Running baseline LOF...
+  k=10... done (avg: 54.8082s)
+  k=20... done (avg: 58.4970s)
+  k=30... done (avg: 62.1922s)
+  k=40... done (avg: 64.3928s)
+  k=50... done (avg: 66.9154s)
+
+Running Original LOF (k_range=10-50)...
+  done (avg: 71.1295s)
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/creditcard/lof_experiments/k10-50/original_lof_results.csv
+Saved: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/creditcard/lof_experiments/k10-50/original_lof_summary.png
+Saved: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/creditcard/lof_experiments/k10-50/original_lof_scatter.png
+
+=== Experiment A Complete ===
+
+================================================================================
+Experiment Complete!
+================================================================================
+
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Sun Dec 28 04:03:23 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n023
+Job ID: 2698522
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 24
+CPU Utilized: 04:45:54
+CPU Efficiency: 18.74% of 1-01:25:36 core-walltime
+Job Wall-clock time: 01:03:34
+Memory Utilized: 696.99 MB
+Memory Efficiency: 1.06% of 64.00 GB (64.00 GB/node)
