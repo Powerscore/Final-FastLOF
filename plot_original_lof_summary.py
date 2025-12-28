@@ -1,9 +1,9 @@
 """
-Generate visualization plots for Original LOF summary table.
+Generate visualization plots for Bounded LOF summary table.
 Uses `results_summary/summary_original_lof.csv` and:
 - Sorts datasets by size (number of samples)
 - Adds dataset shape to labels: "<name> (n_samples, n_features)"
-- Compares best single-k LOF vs OriginalLOF in terms of runtime and ROC-AUC
+- Compares average single-k LOF (with std) vs Bounded LOF in terms of runtime and ROC-AUC
 """
 
 import pandas as pd
@@ -54,12 +54,34 @@ def get_dataset_sizes():
     return dataset_sizes
 
 
+def get_clean_dataset_name(dataset_name):
+    """Map full dataset names to cleaner, shorter names."""
+    name_mapping = {
+        'breast-cancer-unsupervised-ad': 'Breast Cancer',
+        'pen-global-unsupervised-ad': 'Pen (Global)',
+        'InternetAds_norm_02_v01': 'InternetAds',
+        'dfki-artificial-3000-unsupervised-ad': 'DFKI (Artif.)',
+        'satellite-unsupervised-ad': 'Satellite',
+        'pen-local-unsupervised-ad': 'Pen (Local)',
+        'annthyroid-unsupervised-ad': 'Annthyroid',
+        'PenDigits_withoutdupl_norm_v01': 'PenDigits',
+        'mammography': 'Mammography',
+        'shuttle-unsupervised-ad': 'Shuttle',
+        'mulcross': 'Mulcross',
+        'creditcard': 'CreditCard',
+        'ForestCover': 'ForestCover',
+        'http': 'HTTP',
+        'kdd99-unsupervised-ad': 'KDD99',
+    }
+    return name_mapping.get(dataset_name, dataset_name)
+
 def format_dataset_label(dataset_name, dataset_sizes):
     """Format dataset name with shape information in brackets."""
+    clean_name = get_clean_dataset_name(dataset_name)
     if dataset_name in dataset_sizes:
         n_samples, n_features = dataset_sizes[dataset_name]
-        return f"{dataset_name} ({n_samples:,}, {n_features})"
-    return dataset_name
+        return f"{clean_name} ({n_samples:,}, {n_features})"
+    return clean_name
 
 
 def parse_mean_std(value_str):
@@ -82,12 +104,11 @@ def parse_mean_std(value_str):
 
 def load_original_lof_summary(dataset_sizes):
     """
-    Load and parse Original LOF summary table.
+    Load and parse Bounded LOF summary table.
 
     For each dataset, compute:
-      - Best single-k LOF (by ROC-AUC)
-      - Average single-k LOF across k = {10,20,30,40,50}
-      - OriginalLOF metrics
+      - Average single-k LOF across k = {10,20,30,40,50} with std
+      - Bounded LOF metrics
     """
     csv_path = Path("results_summary") / "summary_original_lof.csv"
     if not csv_path.exists():
@@ -132,37 +153,27 @@ def load_original_lof_summary(dataset_sizes):
         if not k_stats:
             continue
 
-        # Best single-k by ROC-AUC (break ties by smaller k)
-        best_k_entry = max(
-            k_stats, key=lambda s: (s["auc_mean"], -s["k"])
-        )
-
         # Average single-k LOF across all k values
         avg_time_mean = float(np.mean([s["time_mean"] for s in k_stats]))
         avg_time_std = float(np.std([s["time_mean"] for s in k_stats]))
         avg_auc_mean = float(np.mean([s["auc_mean"] for s in k_stats]))
         avg_auc_std = float(np.std([s["auc_mean"] for s in k_stats]))
 
-        # OriginalLOF metrics
-        orig_time_mean, orig_time_std = parse_mean_std(row["OriginalLOF_Time"])
-        orig_auc_mean, orig_auc_std = parse_mean_std(row["OriginalLOF_ROC-AUC"])
+        # Bounded LOF metrics
+        bounded_time_mean, bounded_time_std = parse_mean_std(row["OriginalLOF_Time"])
+        bounded_auc_mean, bounded_auc_std = parse_mean_std(row["OriginalLOF_ROC-AUC"])
 
         records.append(
             {
                 "Dataset": dataset,
-                "Best_k": best_k_entry["k"],
-                "Best_k_Time": best_k_entry["time_mean"],
-                "Best_k_Time_Std": best_k_entry["time_std"],
-                "Best_k_AUC": best_k_entry["auc_mean"],
-                "Best_k_AUC_Std": best_k_entry["auc_std"],
                 "Avg_k_Time": avg_time_mean,
                 "Avg_k_Time_Std": avg_time_std,
                 "Avg_k_AUC": avg_auc_mean,
                 "Avg_k_AUC_Std": avg_auc_std,
-                "Original_Time": orig_time_mean,
-                "Original_Time_Std": orig_time_std,
-                "Original_AUC": orig_auc_mean,
-                "Original_AUC_Std": orig_auc_std,
+                "Bounded_Time": bounded_time_mean,
+                "Bounded_Time_Std": bounded_time_std,
+                "Bounded_AUC": bounded_auc_mean,
+                "Bounded_AUC_Std": bounded_auc_std,
             }
         )
 
@@ -170,28 +181,32 @@ def load_original_lof_summary(dataset_sizes):
 
 
 def plot_original_lof_comparison(df, dataset_sizes, output_dir):
-    """Plot grouped bar chart comparing single-k LOF (best & average) vs OriginalLOF."""
+    """Plot grouped bar chart comparing average single-k LOF (with std) vs Bounded LOF."""
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
 
     datasets = df["Dataset"].values
     labels = [format_dataset_label(d, dataset_sizes) for d in datasets]
     n_datasets = len(datasets)
     x = np.arange(n_datasets)
-    width = 0.28
+    width = 0.35
 
     # Runtime comparison
-    best_times = df["Best_k_Time"].values
     avg_times = df["Avg_k_Time"].values
-    orig_times = df["Original_Time"].values
+    avg_times_std = df["Avg_k_Time_Std"].values
+    bounded_times = df["Bounded_Time"].values
 
-    ax1.bar(x - width, best_times, width, label="Best single-k LOF", color="#3498db")
-    ax1.bar(x, avg_times, width, label="Average single-k LOF", color="#95a5a6")
-    ax1.bar(x + width, orig_times, width, label="Original LOF (k=10-50)", color="#e74c3c")
+    # Average single-k LOF with error bars
+    ax1.bar(x - width/2, avg_times, width, yerr=avg_times_std, 
+            label="Average single-k LOF", color="#3498db", alpha=0.8, 
+            capsize=5, error_kw={'linewidth': 2, 'capthick': 2})
+    # Bounded LOF
+    ax1.bar(x + width/2, bounded_times, width, 
+            label="Bounded LOF (k=10-50)", color="#e74c3c", alpha=0.8)
 
     ax1.set_xlabel("Dataset", fontsize=11, fontweight="bold")
     ax1.set_ylabel("Runtime (seconds)", fontsize=11, fontweight="bold")
     ax1.set_title(
-        "Runtime: Single-k LOF (best & avg) vs Original LOF",
+        "Runtime: Average single-k LOF vs Bounded LOF",
         fontsize=12,
         fontweight="bold",
     )
@@ -199,22 +214,26 @@ def plot_original_lof_comparison(df, dataset_sizes, output_dir):
     ax1.set_xticklabels(labels, rotation=45, ha="right", fontsize=7)
     ax1.legend(fontsize=9)
     ax1.grid(axis="y", alpha=0.3, linestyle="--")
-    if np.any(best_times > 0) or np.any(orig_times > 0):
+    if np.any(avg_times > 0) or np.any(bounded_times > 0):
         ax1.set_yscale("log")
 
     # ROC-AUC comparison
-    best_aucs = df["Best_k_AUC"].values
     avg_aucs = df["Avg_k_AUC"].values
-    orig_aucs = df["Original_AUC"].values
+    avg_aucs_std = df["Avg_k_AUC_Std"].values
+    bounded_aucs = df["Bounded_AUC"].values
 
-    ax2.bar(x - width, best_aucs, width, label="Best single-k LOF", color="#3498db")
-    ax2.bar(x, avg_aucs, width, label="Average single-k LOF", color="#95a5a6")
-    ax2.bar(x + width, orig_aucs, width, label="Original LOF (k=10-50)", color="#e74c3c")
+    # Average single-k LOF with error bars
+    ax2.bar(x - width/2, avg_aucs, width, yerr=avg_aucs_std,
+            label="Average single-k LOF", color="#3498db", alpha=0.8,
+            capsize=5, error_kw={'linewidth': 2, 'capthick': 2})
+    # Bounded LOF
+    ax2.bar(x + width/2, bounded_aucs, width,
+            label="Bounded LOF (k=10-50)", color="#e74c3c", alpha=0.8)
 
     ax2.set_xlabel("Dataset", fontsize=11, fontweight="bold")
     ax2.set_ylabel("ROC-AUC", fontsize=11, fontweight="bold")
     ax2.set_title(
-        "ROC-AUC: Single-k LOF (best & avg) vs Original LOF",
+        "ROC-AUC: Average single-k LOF vs Bounded LOF",
         fontsize=12,
         fontweight="bold",
     )
@@ -225,8 +244,8 @@ def plot_original_lof_comparison(df, dataset_sizes, output_dir):
     ax2.set_ylim([0, 1.1])
 
     plt.suptitle(
-        "Original LOF Experiment Summary\n"
-        "(Comparison of single-k LOF (best & average) vs Original LOF across datasets)",
+        "Bounded LOF Experiment Summary\n"
+        "(Comparison of average single-k LOF vs Bounded LOF across datasets)",
         fontsize=14,
         fontweight="bold",
         y=1.03,
@@ -247,15 +266,15 @@ def main():
     dataset_sizes = get_dataset_sizes()
     print(f"  Loaded sizes for {len(dataset_sizes)} datasets")
 
-    print("\nLoading Original LOF summary...")
+    print("\nLoading Bounded LOF summary...")
     df = load_original_lof_summary(dataset_sizes)
     if df is None or df.empty:
-        print("No Original LOF summary data found or parsed.")
+        print("No Bounded LOF summary data found or parsed.")
         return
 
     print(f"  Parsed {len(df)} datasets")
 
-    print("\nGenerating Original LOF comparison plot...")
+    print("\nGenerating Bounded LOF comparison plot...")
     plot_original_lof_comparison(df, dataset_sizes, output_dir)
 
     print("\nDone! Plot saved in results_summary/plots")

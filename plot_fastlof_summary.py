@@ -49,12 +49,34 @@ def get_dataset_sizes():
     
     return dataset_sizes
 
+def get_clean_dataset_name(dataset_name):
+    """Map full dataset names to cleaner, shorter names."""
+    name_mapping = {
+        'breast-cancer-unsupervised-ad': 'Breast Cancer',
+        'pen-global-unsupervised-ad': 'Pen (Global)',
+        'InternetAds_norm_02_v01': 'InternetAds',
+        'dfki-artificial-3000-unsupervised-ad': 'DFKI (Artif.)',
+        'satellite-unsupervised-ad': 'Satellite',
+        'pen-local-unsupervised-ad': 'Pen (Local)',
+        'annthyroid-unsupervised-ad': 'Annthyroid',
+        'PenDigits_withoutdupl_norm_v01': 'PenDigits',
+        'mammography': 'Mammography',
+        'shuttle-unsupervised-ad': 'Shuttle',
+        'mulcross': 'Mulcross',
+        'creditcard': 'CreditCard',
+        'ForestCover': 'ForestCover',
+        'http': 'HTTP',
+        'kdd99-unsupervised-ad': 'KDD99',
+    }
+    return name_mapping.get(dataset_name, dataset_name)
+
 def format_dataset_label(dataset_name, dataset_sizes):
     """Format dataset name with shape information in brackets."""
+    clean_name = get_clean_dataset_name(dataset_name)
     if dataset_name in dataset_sizes:
         n_samples, n_features = dataset_sizes[dataset_name]
-        return f"{dataset_name} ({n_samples:,}, {n_features})"
-    return dataset_name
+        return f"{clean_name} ({n_samples:,}, {n_features})"
+    return clean_name
 
 def parse_mean_std(value_str):
     """Parse 'mean ± std' string into (mean, std) tuple."""
@@ -278,12 +300,15 @@ def plot_performance_bars(df, threshold, output_dir, dataset_sizes):
         ('FastLOF_BestTradeoff', 'FastLOF Best', '#9b59b6'),
     ]
     
+    # First, plot all bars with actual values (excluding NaN)
     for i, (method_key, method_name, color) in enumerate(methods):
         time_col = f'{method_key}_time'
         if time_col in df.columns:
             times = df[time_col].values
-            times = np.where(np.isnan(times), 0, times)
-            ax1.bar(x + i*width, times, width, label=method_name, color=color, alpha=0.8)
+            # Only plot non-NaN values
+            mask = ~np.isnan(times)
+            if np.any(mask):
+                ax1.bar(x[mask] + i*width, times[mask], width, label=method_name, color=color, alpha=0.8)
     
     ax1.set_xlabel('Dataset', fontsize=11, fontweight='bold')
     ax1.set_ylabel('Runtime (seconds)', fontsize=11, fontweight='bold')
@@ -292,8 +317,37 @@ def plot_performance_bars(df, threshold, output_dir, dataset_sizes):
     ax1.set_xticklabels(dataset_labels, rotation=45, ha='right', fontsize=7)
     ax1.legend(fontsize=9, ncol=2)
     ax1.grid(axis='y', alpha=0.3, linestyle='--')
+    
+    # Set log scale if needed
     if np.any(df[[f'{m[0]}_time' for m in methods if f'{m[0]}_time' in df.columns]].values > 0):
         ax1.set_yscale('log')
+    
+    # Get y-axis limits after matplotlib sets them
+    ax1.relim()
+    ax1.autoscale()
+    y_min, y_max = ax1.get_ylim()
+    
+    # Now draw capped bars for missing/failed values at the top of the plot
+    for i, (method_key, method_name, color) in enumerate(methods):
+        time_col = f'{method_key}_time'
+        if time_col in df.columns:
+            times = df[time_col].values
+            # Find NaN positions (missing/failed runs)
+            nan_mask = np.isnan(times)
+            if np.any(nan_mask):
+                # Draw capped bars at y_max height with distinctive styling
+                ax1.bar(x[nan_mask] + i*width, y_max, width, color=color, alpha=0.6, 
+                        edgecolor='red', linewidth=2.5, hatch='///', label='_nolegend_')
+                # Add horizontal line at top to clearly indicate "capped"
+                for idx in np.where(nan_mask)[0]:
+                    bar_x = x[idx] + i*width
+                    # Draw horizontal line across the top of the bar
+                    ax1.plot([bar_x - width/2, bar_x + width/2], 
+                            [y_max, y_max], 
+                            'r-', linewidth=3, solid_capstyle='round')
+    
+    # Ensure y-axis extends exactly to the top border where capped bars are
+    ax1.set_ylim([y_min, y_max])
     
     # AUC comparison (right subplot)
     for i, (method_key, method_name, color) in enumerate(methods):
