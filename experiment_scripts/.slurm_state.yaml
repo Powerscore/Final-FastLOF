@@ -1,5 +1,9 @@
 completed_jobs:
+- kdd99-unsupervised-ad
+- http
+- ForestCover
 - mammography
+- creditcard
 failed_jobs: []
 pending_datasets: []
 submitted_jobs:
@@ -8,4 +12,4 @@ submitted_jobs:
   http: '2660011'
   kdd99-unsupervised-ad: '2660012'
   mammography: '2660008'
-timestamp: '2025-12-22T17:40:09.315581'
+timestamp: '2025-12-23T14:35:39.338074'
