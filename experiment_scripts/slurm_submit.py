@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-SLURM Job Submission and Management Script for FastLOF Experiments
-===================================================================
+SLURM Job Submission and Management Script for LOF Experiments
+================================================================
 
 This script:
 1. Generates individual SLURM job scripts for each dataset
@@ -9,15 +9,18 @@ This script:
 3. Monitors running jobs and submits new ones as slots become available
 4. Provides real-time status updates
 
+Supports both FastLOF and Original LOF experiments.
+
 Usage:
     python slurm_submit.py [OPTIONS]
 
 Options:
-    --generate-only    Generate job scripts without submitting
-    --dry-run         Show what would be submitted without actually submitting
-    --max-concurrent N Set maximum concurrent jobs (overrides config)
-    --dataset NAME    Submit only specific dataset(s)
-    --resume          Resume from last submission state
+    --experiment-type TYPE  Experiment type: 'fastlof' (default) or 'original_lof'
+    --generate-only        Generate job scripts without submitting
+    --dry-run             Show what would be submitted without actually submitting
+    --max-concurrent N     Set maximum concurrent jobs (overrides config)
+    --dataset NAME         Submit only specific dataset(s)
+    --resume               Resume from last submission state
 """
 
 import os
@@ -31,15 +34,19 @@ from datetime import datetime
 from typing import Dict, List, Set, Optional
 
 class SlurmJobManager:
-    """Manages SLURM job submission and monitoring for FastLOF experiments."""
+    """Manages SLURM job submission and monitoring for LOF experiments."""
     
-    def __init__(self, config_path: str = "slurm_config.yaml"):
+    def __init__(self, experiment_type: str = "fastlof", config_path: str = "slurm_config.yaml"):
+        self.experiment_type = experiment_type
+        if self.experiment_type not in ["fastlof", "original_lof"]:
+            raise ValueError(f"Invalid experiment_type: {experiment_type}. Must be 'fastlof' or 'original_lof'")
+        
         self.config_path = config_path
         self.config = self._load_config()
         self.script_dir = Path(__file__).parent.absolute()
         self.log_dir = self.script_dir / "slurm_logs"
         self.jobs_dir = self.script_dir / "slurm_jobs"
-        self.state_file = self.script_dir / ".slurm_state.yaml"
+        self.state_file = self.script_dir / f".slurm_state_{experiment_type}.yaml"
         
         # Job tracking
         self.submitted_jobs: Dict[str, str] = {}  # dataset_name -> job_id
@@ -104,13 +111,20 @@ class SlurmJobManager:
             email_lines = f"#SBATCH --mail-user={global_config['email']}\n"
             email_lines += f"#SBATCH --mail-type={global_config.get('email_type', 'FAIL,END')}"
         
-        # Script path
-        script_path = f"experiment_scripts/{dataset_name}/run_fastlof.py"
+        # Determine script path based on experiment type
+        if self.experiment_type == "original_lof":
+            script_path = f"experiment_scripts/{dataset_name}/run_original_lof.py"
+            experiment_display = "Original LOF"
+        else:  # fastlof
+            script_path = f"experiment_scripts/{dataset_name}/run_fastlof.py"
+            experiment_display = "FastLOF"
         
         # Fill in template
         job_script = template.format(
-            JOB_NAME=f"fastlof_{dataset_name}",
+            JOB_NAME=f"{self.experiment_type}_{dataset_name}",
             DATASET_NAME=dataset_name,
+            EXPERIMENT_TYPE=self.experiment_type,
+            EXPERIMENT_DISPLAY=experiment_display,
             TIME=dataset_config['time'],
             CPUS=dataset_config['cpus'],
             MEMORY=dataset_config['memory'],
@@ -124,7 +138,7 @@ class SlurmJobManager:
         )
         
         # Save job script
-        job_file = self.jobs_dir / f"{dataset_name}_fastlof.sh"
+        job_file = self.jobs_dir / f"{dataset_name}_{self.experiment_type}.sh"
         with open(job_file, 'w') as f:
             f.write(job_script)
         
@@ -136,14 +150,14 @@ class SlurmJobManager:
     def generate_all_job_scripts(self):
         """Generate SLURM job scripts for all datasets."""
         print("=" * 80)
-        print("Generating SLURM Job Scripts")
+        print(f"Generating SLURM Job Scripts - {self.experiment_type.upper()}")
         print("=" * 80)
         print()
         
         datasets = self.config['datasets']
         for dataset_name in datasets:
             job_file = self.generate_job_script(dataset_name)
-            print(f"✓ Generated: {job_file.name}")
+            print(f"[OK] Generated: {job_file.name}")
         
         print()
         print(f"Generated {len(datasets)} job scripts in {self.jobs_dir}")
@@ -151,10 +165,10 @@ class SlurmJobManager:
     
     def submit_job(self, dataset_name: str, dry_run: bool = False) -> Optional[str]:
         """Submit a single job and return job ID."""
-        job_file = self.jobs_dir / f"{dataset_name}_fastlof.sh"
+        job_file = self.jobs_dir / f"{dataset_name}_{self.experiment_type}.sh"
         
         if not job_file.exists():
-            print(f"✗ Job script not found: {job_file}")
+            print(f"[ERROR] Job script not found: {job_file}")
             return None
         
         cmd = ['sbatch', str(job_file)]
@@ -174,11 +188,11 @@ class SlurmJobManager:
             output = result.stdout.strip()
             job_id = output.split()[-1]
             
-            print(f"✓ Submitted {dataset_name}: Job ID {job_id}")
+            print(f"[OK] Submitted {dataset_name}: Job ID {job_id}")
             return job_id
             
         except subprocess.CalledProcessError as e:
-            print(f"✗ Failed to submit {dataset_name}: {e.stderr}")
+            print(f"[ERROR] Failed to submit {dataset_name}: {e.stderr}")
             return None
     
     def get_running_jobs(self) -> Set[str]:
@@ -251,7 +265,7 @@ class SlurmJobManager:
     def run_submission_loop(self, max_concurrent: int, dry_run: bool = False):
         """Main loop to manage job submissions."""
         print("=" * 80)
-        print("Starting SLURM Job Submission Manager")
+        print(f"Starting SLURM Job Submission Manager - {self.experiment_type.upper()}")
         print("=" * 80)
         print()
         print(f"Maximum concurrent jobs: {max_concurrent}")
@@ -294,7 +308,7 @@ class SlurmJobManager:
                     # For simplicity, mark as completed if not in queue
                     # Could enhance this by checking exit codes in log files
                     self.completed_jobs.add(dataset)
-                    print(f"✓ {dataset} completed (Job {job_id})")
+                    print(f"[OK] {dataset} completed (Job {job_id})")
                     self._save_state()
             
             # Submit new jobs if slots available
@@ -332,7 +346,14 @@ class SlurmJobManager:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="SLURM job submission manager for FastLOF experiments"
+        description="SLURM job submission manager for LOF experiments (FastLOF and Original LOF)"
+    )
+    parser.add_argument(
+        '--experiment-type',
+        type=str,
+        default='fastlof',
+        choices=['fastlof', 'original_lof'],
+        help='Experiment type: fastlof (default) or original_lof'
     )
     parser.add_argument(
         '--generate-only',
@@ -363,7 +384,7 @@ def main():
     args = parser.parse_args()
     
     # Initialize manager
-    manager = SlurmJobManager()
+    manager = SlurmJobManager(experiment_type=args.experiment_type)
     
     # Generate job scripts
     manager.generate_all_job_scripts()

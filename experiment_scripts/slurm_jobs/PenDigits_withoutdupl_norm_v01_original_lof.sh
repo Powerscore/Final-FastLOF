@@ -1,25 +1,26 @@
 #!/bin/bash
-#SBATCH --job-name={JOB_NAME}
-#SBATCH --output=slurm_logs/{DATASET_NAME}_{EXPERIMENT_TYPE}_%j.out
-#SBATCH --error=slurm_logs/{DATASET_NAME}_{EXPERIMENT_TYPE}_%j.err
-#SBATCH --time={TIME}
+#SBATCH --job-name=original_lof_PenDigits_withoutdupl_norm_v01
+#SBATCH --output=slurm_logs/PenDigits_withoutdupl_norm_v01_original_lof_%j.out
+#SBATCH --error=slurm_logs/PenDigits_withoutdupl_norm_v01_original_lof_%j.err
+#SBATCH --time=36:00:00
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task={CPUS}
-#SBATCH --mem={MEMORY}
-#SBATCH --partition={PARTITION}
-{EMAIL_LINES}
+#SBATCH --cpus-per-task=20
+#SBATCH --mem=48G
+#SBATCH --partition=cpu
+#SBATCH --mail-user=alaa.ashraf.uni@gmail.com
+#SBATCH --mail-type=FAIL,END
 # ============================================================================
-# {EXPERIMENT_DISPLAY} Experiment - {DATASET_NAME}
+# Original LOF Experiment - PenDigits_withoutdupl_norm_v01
 # ============================================================================
 # Generated automatically by slurm_submit.py
-# Estimated runtime: {ESTIMATED_TIME}
+# Estimated runtime: ~20 hours
 # ============================================================================
 
 # Thread limiting to prevent overhead
-export OMP_NUM_THREADS={NUM_THREADS}
-export MKL_NUM_THREADS={NUM_THREADS}
-export OPENBLAS_NUM_THREADS={NUM_THREADS}
-export NUMEXPR_NUM_THREADS={NUM_THREADS}
+export OMP_NUM_THREADS=5
+export MKL_NUM_THREADS=5
+export OPENBLAS_NUM_THREADS=5
+export NUMEXPR_NUM_THREADS=5
 
 # Print job information
 echo "========================================================================"
@@ -30,14 +31,14 @@ echo "Job Name: $SLURM_JOB_NAME"
 echo "Node: $(hostname)"
 echo "Started at: $(date)"
 echo "CPUs allocated: $SLURM_CPUS_PER_TASK"
-echo "Memory allocated: {MEMORY}"
-echo "Partition: {PARTITION}"
-echo "Thread limit: {NUM_THREADS}"
+echo "Memory allocated: 48G"
+echo "Partition: cpu"
+echo "Thread limit: 5"
 echo "========================================================================"
 echo ""
 
 # Change to working directory
-cd {WORK_DIR}
+cd /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
 echo "Working directory: $(pwd)"
 echo ""
 
@@ -53,11 +54,11 @@ echo ""
 
 # Run the experiment script
 echo "========================================================================"
-echo "Starting Experiment: {DATASET_NAME} - {EXPERIMENT_DISPLAY}"
+echo "Starting Experiment: PenDigits_withoutdupl_norm_v01 - Original LOF"
 echo "========================================================================"
 echo ""
 
-{PYTHON_CMD} {SCRIPT_PATH} 2>&1 | tee -a experiment_scripts/slurm_logs/{DATASET_NAME}_{EXPERIMENT_TYPE}_live.log
+python -u experiment_scripts/PenDigits_withoutdupl_norm_v01/run_original_lof.py 2>&1 | tee -a experiment_scripts/slurm_logs/PenDigits_withoutdupl_norm_v01_original_lof_live.log
 
 EXIT_CODE=$?
 
