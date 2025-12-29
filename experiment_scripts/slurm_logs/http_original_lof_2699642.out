@@ -51,4 +51,47 @@ Using contamination parameter: 0.0039
 Testing k values: [10, 20, 30, 40, 50]
 
 Running baseline LOF...
-  k=10...
+  k=10... done (avg: 498.6830s)
+  k=20... done (avg: 339.2934s)
+  k=30... done (avg: 539.5314s)
+  k=40... done (avg: 547.3075s)
+  k=50... done (avg: 686.3025s)
+
+Running Original LOF (k_range=10-50)...
+  done (avg: 1049.8576s)
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/lof_experiments/k10-50/original_lof_results.csv
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1168: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
+  fig.tight_layout(rect=[0, 0, 1, 0.95])
+/pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/experiments.py:1169: UserWarning: Creating legend with loc="best" can be slow with large amounts of data.
+  fig.savefig(out_path, dpi=300, bbox_inches='tight')
+Saved: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/lof_experiments/k10-50/original_lof_summary.png
+Saved: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/http/lof_experiments/k10-50/original_lof_scatter.png
+
+=== Experiment A Complete ===
+
+================================================================================
+Experiment Complete!
+================================================================================
+
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Mon Dec 29 06:33:09 AM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n005
+Job ID: 2699642
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 01:44:30
+CPU Efficiency: 0.71% of 10-05:00:40 core-walltime
+Job Wall-clock time: 12:15:02
+Memory Utilized: 1.25 GB
+Memory Efficiency: 2.60% of 48.00 GB (48.00 GB/node)
