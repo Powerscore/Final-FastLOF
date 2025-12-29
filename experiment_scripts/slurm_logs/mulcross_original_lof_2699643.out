@@ -1,0 +1,93 @@
+========================================================================
+Job Information
+========================================================================
+Job ID: 2699643
+Job Name: original_lof_mulcross
+Node: uc3n009.localdomain
+Started at: Sun Dec 28 06:18:22 PM CET 2025
+CPUs allocated: 20
+Memory allocated: 48G
+Partition: cpu
+Thread limit: 5
+========================================================================
+
+Working directory: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF
+
+========================================================================
+Environment Information
+========================================================================
+Python 3.9.18
+
+matplotlib                    3.9.4
+numpy                         2.0.2
+pandas                        2.3.3
+scikit-learn                  1.6.1
+========================================================================
+
+========================================================================
+Starting Experiment: mulcross - Original LOF
+========================================================================
+
+
+================================================================================
+Original LOF Experiment - mulcross
+================================================================================
+
+Loading dataset: data/mulcross.arff
+
+--- Dataset preview (first 5 rows) ---
+         V1        V2        V3        V4     Target
+0 -0.203950  0.363011  1.013766  0.187131  b'Normal'
+1 -0.761118  2.436424  0.681846  0.654366  b'Normal'
+2 -0.209979  1.131098 -0.282180 -0.202210  b'Normal'
+3  0.836812  0.650342 -0.426900 -0.305281  b'Normal'
+4  0.454204  1.560128 -0.204841  0.219233  b'Normal'
+--------------------------------------
+Dataset shape: (262144, 4)
+Number of anomalies: 26214 (10.00%)
+
+=== Experiment A: Original LOF Quality & Robustness ===
+Using contamination parameter: 0.1000
+Testing k values: [10, 20, 30, 40, 50]
+
+Running baseline LOF...
+  k=10... done (avg: 2.5995s)
+  k=20... done (avg: 3.6182s)
+  k=30... done (avg: 4.5582s)
+  k=40... done (avg: 5.4405s)
+  k=50... done (avg: 6.2801s)
+
+Running Original LOF (k_range=10-50)...
+  done (avg: 11.0144s)
+Saved results to /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/lof_experiments/k10-50/original_lof_results.csv
+Saved: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/lof_experiments/k10-50/original_lof_summary.png
+Saved: /pfs/data6/home/hu/hu_hu/hu_abdeal01/Final-FastLOF/results/mulcross/lof_experiments/k10-50/original_lof_scatter.png
+
+=== Experiment A Complete ===
+
+================================================================================
+Experiment Complete!
+================================================================================
+
+
+========================================================================
+Job Completion
+========================================================================
+Exit code: 0
+Completed at: Sun Dec 28 06:24:17 PM CET 2025
+========================================================================
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n009
+Job ID: 2699643
+Cluster: uc3
+User/Group: hu_abdeal01/hu_hu
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 00:05:50
+CPU Efficiency: 4.73% of 02:03:20 core-walltime
+Job Wall-clock time: 00:06:10
+Memory Utilized: 685.06 MB
+Memory Efficiency: 1.39% of 48.00 GB (48.00 GB/node)
